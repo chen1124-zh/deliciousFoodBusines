@@ -377,6 +377,111 @@
 			}
 		},
 		onLoad() {
+			var good = uni.getStorageSync('uGood');
+			if(good == ''){
+				
+			}else{
+				this.addData = {
+					productName:good.productName,     //商品名称
+					productPrice:good.productName,   //商品价格
+					linedPrice:good.linedPrice,   //划线价格
+					menuType:'',      //菜单类型
+					menuTypeIndex:0,	//下标
+					productDetails:good.productDetails,   //商品详情
+					describe:good.describe,     //描述
+					productWeight:good.productWeight,    //商品分量
+					stock:good.productWeight,      //原料
+					producingArea:good.productWeight,   //产地
+					energy:good.productWeight,    //能量
+					specification:'',   //规格
+					makeTime:good.makeTime,    //制作时间
+					packing:good.packing,    //包装费
+					preparesDate:good.preparesDate,   //备餐日期
+					preparesTime:good.preparesTime,    //备餐时段
+					storeId:good.preparesTime,    //商家id
+					productImg:'',   //商品图片
+					productStatus:good.productStatus,   //商品状态
+					productSet:good.productSet   //商品系列
+				}
+				this.specification = JSON.parse(good.specification) ;
+				
+				
+				
+				this.items = [
+					{
+						value: 'week1',
+						name: '周一',
+						checked:good.week1==1?true:false
+					},
+					{
+						value: 'week2',
+						name: '周二',
+						checked:good.week2==1?true:false
+					},
+					{
+						value: 'week3',
+						name: '周三',
+						checked:good.week3==1?true:false
+					},
+					{
+						value: 'week4',
+						name: '周四',
+						checked:good.week4==1?true:false
+					},
+					{
+						value: 'week5',
+						name: '周五',
+						checked:good.week5==1?true:false
+					},
+					{
+						value: 'week6',
+						name: '周六',
+						checked:good.week6==1?true:false
+					},
+					{
+						value: 'week7',
+						name: '周日',
+						checked:good.week7==1?true:false
+					}
+				]
+				this.sditems = [
+					{
+						value: 'zc',
+						name: '早茶',
+						checked:good.zc==1?true:false
+					},
+					{
+						value: 'zcn',
+						name: '早餐',
+						checked:good.zcn==1?true:false
+					},
+					{
+						value: 'wc',
+						name: '午餐',
+						checked:good.wc==1?true:false
+					},
+					{
+						value: 'xwc',
+						name: '下午茶',
+						checked:good.xwc==1?true:false
+					},
+					{
+						value: 'wcn',
+						name: '晚餐',
+						checked:good.wcn==1?true:false
+					},
+					{
+						value: 'xy',
+						name: '宵夜',
+						checked:good.xy==1?true:false
+					}
+				]
+				
+				
+				
+				
+				
+			}
 			this.shopId = uni.getStorageSync('shopData').id;
 			this.user = uni.getStorageSync("user")
 			this.getMenuTypeListData()
@@ -512,7 +617,7 @@
 					stock:this.addData.stock,      //原料
 					producingArea:this.addData.producingArea,   //产地
 					energy:this.addData.energy,    //能量
-					specification:this.addData.specification,   //规格
+					specification:JSON.stringify(this.specification),   //规格
 					makeTime:this.addData.makeTime,    //制作时间
 					packing:this.addData.packing,    //包装费
 					preparesDate:this.addData.preparesDate,   //备餐日期

@@ -88,7 +88,7 @@
 								</view>
 								
 								<view class="cz" >
-									<text class="">
+									<text class="" @click="uGoog(index)">
 										修改
 									</text>
 									<text class="">
@@ -157,6 +157,12 @@
 
 		},
 		methods: {
+			uGoog(index){
+				uni.setStorageSync('uGood',this.goodList[index])
+				uni.navigateTo({
+					url:'../../pagesA/addCommodity/addCommodity'
+				})
+			},
 			cschange(e){
 				this.csIndex = e.detail.value;
 				this.getGoodData()
@@ -172,6 +178,7 @@
 				})
 			},
 			addCommodity(){
+				uni.clearStorageSync('uGood')
 				uni.navigateTo({
 					url:"../../pagesA/addCommodity/addCommodity"
 				})
