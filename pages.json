@@ -1,0 +1,239 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "美食天下",
+				"navigationBarBackgroundColor":"#0D92FF",
+				"navigationBarTextStyle":"#fff",
+				"navigationStyle":"custom"
+				 
+			}
+		}
+	    ,{
+            "path" : "pages/business/business",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商家",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+				
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+			}
+            
+        }
+        ,{
+            "path" : "pages/personal/personal",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+				"navigationBarBackgroundColor":"#0D92FF",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+       
+        
+        
+    ],
+	"subPackages": [{
+		"root": "pagesA",
+		"pages": [
+			{
+				"path" : "list/list",
+				"style" : {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+			}
+		  
+                ,{
+                    "path" : "search/search",
+                    "style" : {
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
+                }
+                ,{
+                    "path" : "searchResult/searchResult",
+                    "style" : {
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false,
+						"navigationStyle":"custom"
+					}
+                }
+                ,{
+                    "path" : "classification/classification",
+                    "style" : {
+						"navigationBarTitleText": "菜单分类"
+					}
+                }
+                ,{
+                    "path" : "addCommodity/addCommodity",
+                    "style" : {
+						"navigationBarTitleText": "添加商品"
+					}
+                }
+                ,{
+                    "path" : "orderdDetails/orderdDetails",
+                    "style" : {
+						"navigationBarTitleText": "",
+						"navigationBarBackgroundColor":"#0D92FF"
+					}
+                }
+                ,{
+                    "path" : "shopSetUp/shopSetUp",
+                    "style" : {
+						"navigationBarTitleText": "店铺设置"
+					}
+                } ,{
+					"path" : "shopInformation/shopInformation",
+					"style" : {
+						"navigationBarTitleText": "店铺信息"
+					}
+				}
+                ,{
+                    "path" : "customLabel/customLabel",
+                    "style" : {
+						"navigationBarTitleText": "店铺标签"
+					}
+                }
+                ,{
+                    "path" : "label/label",
+                    "style" : {}
+                },{
+					"path" : "news/news",
+					"style" : {
+						"navigationBarTitleText": "消息"
+					}
+				}
+                ,{
+                    "path" : "doBusiness/doBusiness",
+                    "style" : {
+						"navigationBarTitleText": "营业时间"
+					}
+                }
+                ,{
+                    "path" : "Distribution/Distribution",
+                    "style" : {
+						"navigationBarTitleText": "配送设置"
+					}
+                }
+                ,{
+                    "path" : "MealTime/MealTime",
+                    "style" : {
+						"navigationBarTitleText": "餐时设置"
+					}
+                }
+                ,{
+                    "path" : "position/position",
+                    "style" : {
+						"navigationBarTitleText": "桌位设置"
+					}
+                }
+                ,{
+                    "path" : "branchStore/branchStore",
+                    "style" : {
+						"navigationBarTitleText": "分店管理",
+						"navigationBarBackgroundColor":"#10C5A5",
+						"navigationBarTextStyle":"white"
+					}
+                }
+                ,{
+                    "path" : "clerk/clerk",
+                    "style" : {
+						"navigationBarTitleText": "店员管理",
+						"navigationBarBackgroundColor":"#10C5A5"
+						
+					}
+                },{
+					"path" : "addShop/addShop",
+					"style" : {
+						"navigationBarTitleText": "店铺申请",
+						"navigationBarBackgroundColor":"#10C5A5",
+						"navigationBarTextStyle":"white"
+					}
+				}
+                ,{
+                    "path" : "regionMap/regionMap",
+                    "style" : {
+						"navigationBarTitleText": "选择地区"	
+					}
+                }
+                ,{
+                    "path" : "Induction/Induction",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "商家入驻",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "examine/examine",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "入驻审核中",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "archives/archives",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "食品安全档案",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "reserve/reserve",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "预定设置",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+	}],
+	"tabBar":{
+		"color":"#464646",
+		"selectedColor":"#2697F4",
+		"list":[
+			{
+		        "pagePath": "pages/index/index",
+				"text":"任务"
+		    },
+			{
+			    "pagePath": "pages/business/business",
+				"text":"商家"
+			},
+			{
+			    "pagePath": "pages/order/order",
+				"text":"订单"
+			},
+			{
+			    "pagePath": "pages/personal/personal",
+				"text":"我的"
+			}
+			
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
