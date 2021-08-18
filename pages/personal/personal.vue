@@ -264,7 +264,7 @@
 								success: (ress) => {
 									let code = ress.code
 									uni.request({
-										url: 'http://127.0.0.1:8080/user/save', //仅为示例，并非真实接口地址。
+										url: 'http://47.113.217.251:8080/user/save', //仅为示例，并非真实接口地址。
 										method:"POST",
 										data: {           
 											"code":code,

@@ -145,17 +145,15 @@ function deleteSeat (data) {
 	})
 }
 
+// 修改商品
+function updateProduct (data) {
+	return request({
+		method: "post", // 请求方式
+		url: 'product/updateProduct', // 请求url
+		data: data // 参数
+	})
+}
 
-
-
-
-
-
-
-
-
-
- 
 
 
 
@@ -177,5 +175,6 @@ export default{
 	updateUser,
 	addSeat,
 	getSeatList,
-	deleteSeat
+	deleteSeat,
+	updateProduct
 }

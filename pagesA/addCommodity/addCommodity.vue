@@ -80,6 +80,9 @@
 						<image src="../../static/x.svg" mode=""></image>
 					</view>
 					<view class="s_pass" v-for="(item,index) in img" :key='index'>
+						<view class="" style="position: absolute;top: -20rpx;right: -20rpx;" @click="dimg(item.id)">
+							<uni-icons type="close" color="red"></uni-icons>
+						</view>
 						<image :src="item.path" mode="" style="width: 100%;height: 100%;"></image>
 					</view>
 					<!-- <input type="" value="" /> -->
@@ -271,6 +274,7 @@
 </template>
 
 <script>
+	import uniIcons from "@/components/uni-icons/uni-icons.vue"
 	import Api from '@/common/http.js'
 	export default {
 		data() {
@@ -373,26 +377,31 @@
 					productImg:'',   //商品图片
 					productStatus:'',   //商品状态
 					productSet:''   //商品系列
-				}
+				},
+				goods:''
 			}
+		},
+		components:{
+			uniIcons
 		},
 		onLoad() {
 			var good = uni.getStorageSync('uGood');
+			this.goods = good
 			if(good == ''){
 				
 			}else{
 				this.addData = {
 					productName:good.productName,     //商品名称
-					productPrice:good.productName,   //商品价格
+					productPrice:good.productPrice,   //商品价格
 					linedPrice:good.linedPrice,   //划线价格
 					menuType:'',      //菜单类型
 					menuTypeIndex:0,	//下标
 					productDetails:good.productDetails,   //商品详情
 					describe:good.describe,     //描述
 					productWeight:good.productWeight,    //商品分量
-					stock:good.productWeight,      //原料
-					producingArea:good.productWeight,   //产地
-					energy:good.productWeight,    //能量
+					stock:good.stock,      //原料
+					producingArea:good.producingArea,   //产地
+					energy:good.energy,    //能量
 					specification:'',   //规格
 					makeTime:good.makeTime,    //制作时间
 					packing:good.packing,    //包装费
@@ -403,10 +412,15 @@
 					productStatus:good.productStatus,   //商品状态
 					productSet:good.productSet   //商品系列
 				}
-				this.specification = JSON.parse(good.specification) ;
+				
+				if(good.specification == '' || good.specification == undefined){
+					
+				}else{
+					this.specification = JSON.parse(good.specification) ;
+				}
 				
 				
-				
+			
 				this.items = [
 					{
 						value: 'week1',
@@ -474,19 +488,48 @@
 						value: 'xy',
 						name: '宵夜',
 						checked:good.xy==1?true:false
-					}
+					} 
 				]
+				console.log(123)
+				if(good.productImg == ''){
+					
+				}else{
+					console.log(good.productImg.split(","))
+					var tempImg = good.productImg.split(",")
+					tempImg.map((item)=>{
+						this.img.push({
+							id:this.imgId++,
+							path:item
+						})
+							
+					})
+				}
+				
+				// this.img = []
 				
 				
 				
 				
 				
 			}
+			
+			
 			this.shopId = uni.getStorageSync('shopData').id;
 			this.user = uni.getStorageSync("user")
 			this.getMenuTypeListData()
 		},
 		methods: {
+			dimg(id){
+				var t = this.img.filter((item)=>{
+					if(item.id != id){
+						return item
+						// console.log(123)
+					}
+				})
+				
+				this.img = t
+				// console.log(t)
+			},
 			addImg(){
 				var than = this
 				uni.chooseImage({
@@ -510,10 +553,10 @@
 									
 									var d = uploadFileRes.data.substring(1,uploadFileRes.data.length-1)
 									console.log(d)
-								  than.img.push({
-								  	id:than.imgId++,
-								  	path:d
-								  })
+									  than.img.push({
+										id:than.imgId++,
+										path:d
+									  })
 								}
 									
 									
@@ -596,7 +639,6 @@
 				this.step ++
 			},
 			addProductData(){
-				
 				var productImgStr = ''
 				this.img.map((item)=>{
 					
@@ -605,7 +647,9 @@
 					
 				})
 				
+				
 				productImgStr = productImgStr.substring(0,productImgStr.length-1)
+				
 				var data = {
 					productName:this.addData.productName,     //商品名称
 					productPrice:this.addData.productPrice,   //商品价格
@@ -644,33 +688,71 @@
 					saleNum:0,
 					saleMoney:0,
 					status:0
-					
+					 
 				}
-				Api.addProduct(data).then(res => {
-					console.log(res)
-					if(res.code == 200){
-						uni.showToast({
-							title:"新增成功",
-							icon:"none"
-						});
-						setTimeout(()=>{
-							uni.navigateBack({
-								delta:-1
-							})
-						},1000)
-					}else{
-						uni.showToast({
-							title:"新增失败！！！",
-							icon:"none"
-						})
-					}
+				
+				
+				if(this.goods != ''){
 					
-				}).catch(err => {
-					uni.showToast({
-						title: err.msg,
-						icon: 'none'
-					})
-				});
+					data.id = this.goods.id
+					Api.updateProduct(data).then(res => {
+						
+						if(res.code == 200){
+							uni.showToast({
+								title:"修改成功",
+								icon:"none"
+							});
+							setTimeout(()=>{
+								uni.navigateBack({
+									delta:-1
+								})
+							},1000)
+						}else{
+							uni.showToast({
+								title:"修改失败！！！",
+								icon:"none"
+							})
+						}
+						
+					}).catch(err => {
+						uni.showToast({
+							title: err.msg,
+							icon: 'none'
+						})
+					});
+				}else{
+					
+					
+					
+					console.log(data)
+					Api.addProduct(data).then(res => {
+						console.log(res)
+						if(res.code == 200){
+							uni.showToast({
+								title:"新增成功",
+								icon:"none"
+							});
+							setTimeout(()=>{
+								uni.navigateBack({
+									delta:-1
+								})
+							},1000)
+						}else{
+							uni.showToast({
+								title:"新增失败！！！",
+								icon:"none"
+							})
+						}
+						
+					}).catch(err => {
+						uni.showToast({
+							title: err.msg,
+							icon: 'none'
+						})
+					});
+				}
+				
+				
 			}
 		}
 	}
@@ -861,6 +943,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
 	}
 	
 	.s_pass image{

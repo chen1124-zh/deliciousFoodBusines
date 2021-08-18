@@ -91,8 +91,9 @@
 									<text class="" @click="uGoog(index)">
 										修改
 									</text>
-									<text class="">
-										下架
+									<text class="" @click="sxGoog(index)">
+										{{item.productStatus == 1?'下架':'上架'}}
+										
 									</text>
 								</view>
 							</view>
@@ -157,6 +158,41 @@
 
 		},
 		methods: {
+			sxGoog(index){
+				var data = goodList[index]
+				if(data.productStatus == 1){
+					data.productStatus = 0
+				}else{
+					data.productStatus = 1
+				}
+				
+				
+				Api.updateProduct(data).then(res => {
+					
+					if(res.code == 200){
+						uni.showToast({
+							title:"修改成功",
+							icon:"none"
+						});
+						setTimeout(()=>{
+							uni.navigateBack({
+								delta:-1
+							})
+						},1000)
+					}else{
+						uni.showToast({
+							title:"修改失败！！！",
+							icon:"none"
+						})
+					}
+					
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+			},
 			uGoog(index){
 				uni.setStorageSync('uGood',this.goodList[index])
 				uni.navigateTo({
@@ -178,7 +214,10 @@
 				})
 			},
 			addCommodity(){
-				uni.clearStorageSync('uGood')
+				uni.removeStorage({
+					key:'uGood'
+				})
+				// uni.clearStorageSync('uGood')
 				uni.navigateTo({
 					url:"../../pagesA/addCommodity/addCommodity"
 				})

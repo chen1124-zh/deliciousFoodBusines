@@ -300,12 +300,15 @@
 										  name: 'file',
 										 
 										  success: (uploadFileRes)=> {
-											  this.img = res.tempFilePath
+											  console.log(uploadFileRes.data)
+											  
+											  var d = uploadFileRes.data.substring(1,uploadFileRes.data.length-1)
+											  // this.img = uploadFileRes.data
 												this.z.map((item,index)=>{
 													
 													var data = {
 														storeId:this.shopData.id||'',  //店铺ID
-														seatImg:this.img||'',    //桌位图
+														seatImg:d||'',    //桌位图
 														seatType:item.packages||0,   //桌位类型
 														seatName:item.name||'',    //桌位名称
 														seatStatus:item.color=='#F04040'?1:item.color=='#3ACE1B'?2:0||0,   //桌位状态

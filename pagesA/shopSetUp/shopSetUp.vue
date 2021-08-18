@@ -45,7 +45,7 @@
 					{
 						name:'预定设置',
 						Already:false,
-						path:''
+						path:'../reserve/reserve'
 					},{
 						name:'餐时设置',
 						Already:false,
