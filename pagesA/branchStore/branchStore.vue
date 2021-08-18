@@ -39,7 +39,7 @@
 						<text>店铺地址：</text>
 					</view>
 					<view class="operation">
-						<view class="">
+						<view class="" @click="ustore(index)">
 							编辑
 						</view>
 						<view class="">
@@ -72,6 +72,13 @@
 			this.getShopList()
 		},
 		methods: {
+			ustore(index){
+				uni.setStorageSync('shopDatas',this.shopData[index])
+				uni.navigateTo({
+					url:'../shopSetUp/shopSetUp'
+				})
+			},
+			
 			getShopList(){
 				var than = this
 				

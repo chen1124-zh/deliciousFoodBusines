@@ -63,7 +63,14 @@
 			}
 		},
 		onShow() {
-			var shops = uni.getStorageSync('shopData')
+			var tempshop = uni.getStorageSync('shopDatas')
+			var shops
+			if(tempshop == ''){
+				shops = uni.getStorageSync('shopData')
+			}else{
+				shops = tempshop
+			}
+			 
 			if(shops == ''){
 				
 			}else{
@@ -81,6 +88,15 @@
 				if(shops.deliveryTime!=''	&&shops.startingPrice!=''&&shops.deliveryRange!=''&&shops.deliveryCost!=''
 				&&shops.longDeliveryRange!=''&& shops.deliveryWay==0 ){
 					this.shop[3].Already = true
+				}
+				
+				if(shops.bookSetUp!=''	&&shops.seat!=''&&shops.zcTimeType!=''&&shops.zcBookHour!=''
+				&&shops.zcBookDay1!=''&& shops.zcBookDay2!=''&&shops.zcNowTimeBook!='' 
+				&&shops.zchTimeType!=''&&shops.zchBookHour!=''&&shops.zchBookDay1!=''&&shops.zchBookDay2!=''&&shops.zchNowTimeBook!=''
+				&&shops.wcTimeType!=''&&shops.wcBookHour!=''&&shops.wcBookDay1!=''&&shops.wcBookDay2!=''&&shops.wcNowTimeBook!=''
+				&&shops.wcnTimeType!=''&&shops.wcnBookHour!=''&&shops.wcnBookDay1!=''&&shops.wcnBookDay2!=''&&shops.wcnNowTimeBook!=''
+				&&shops.yxTimeType!=''&&shops.yxBookHour!=''&&shops.yxBookDay1!=''&&shops.yxBookDay2!=''&&shops.yxNowTimeBook!=''){
+					this.shop[4].Already = true
 				}
 				
 				

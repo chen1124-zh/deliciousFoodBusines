@@ -145,7 +145,17 @@
 			}
 		},
 		onLoad() {
-			this.shop = uni.getStorageSync('shopData');
+			
+			 // = uni.getStorageSync('shopData');
+			
+			var tempshop = uni.getStorageSync('shopDatas')
+			var shops
+			if(tempshop == ''){
+				shops = uni.getStorageSync('shopData')
+			}else{
+				shops = tempshop
+			}
+			this.shop = shops
 			if(this.shop.businessDate== '' || this.shop.businessDate== undefined ||this.shop.businessDate== 'undefined'){
 				
 			}else{

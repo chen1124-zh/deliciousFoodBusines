@@ -78,7 +78,7 @@
 							</view>
 							<view class="operation">
 								<view class="price_discount">
-									<view class="discount">
+									<view class="discount" v-if="false">
 										9.8
 										<!-- ￥{{item.linedPrice}} -->
 									</view>
@@ -382,6 +382,7 @@
 		height: 200rpx;
 		background: #000000;
 		margin-right: 10rpx;
+		overflow: hidden;
 	}
 	
 	.good_name{

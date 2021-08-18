@@ -134,7 +134,15 @@
 		onLoad() {
 			this.index = 0
 			this.z = []
-			this.shopData = uni.getStorageSync("shopData");
+			var tempshop = uni.getStorageSync('shopDatas')
+			var shops
+			if(tempshop == ''){
+				shops = uni.getStorageSync('shopData')
+			}else{
+				shops = tempshop
+			}
+			// this.shop = shops
+			this.shopData = shops
 			
 			if(this.shopData == ''){
 				

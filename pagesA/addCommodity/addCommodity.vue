@@ -388,8 +388,12 @@
 			var good = uni.getStorageSync('uGood');
 			this.goods = good
 			if(good == ''){
-				
+				this.shopId = uni.getStorageSync('shopData').id;
+				this.getMenuTypeListData()
 			}else{
+				
+				this.shopId = uni.getStorageSync('shopData').id;
+				this.getMenuTypeListData(good.menuType)
 				this.addData = {
 					productName:good.productName,     //商品名称
 					productPrice:good.productPrice,   //商品价格
@@ -514,9 +518,8 @@
 			}
 			
 			
-			this.shopId = uni.getStorageSync('shopData').id;
+			
 			this.user = uni.getStorageSync("user")
-			this.getMenuTypeListData()
 		},
 		methods: {
 			dimg(id){
@@ -607,7 +610,8 @@
 			changeMenuType(e){
 				this.addData.menuTypeIndex = e.detail.value
 			},
-			getMenuTypeListData(){
+			getMenuTypeListData(menuType){
+				console.log(menuType)
 				var than = this
 				var data = {
 					 storeId:this.shopId
@@ -622,6 +626,16 @@
 						icon: 'none'
 					})
 				});
+				if(menuType==undefined){
+					
+				}else{
+					this.addData.menuType.map((item,index)=>{
+						if(item.id ==  menuType){
+							than.addData.menuTypeIndex = index
+						}
+					})
+				}
+				
 				
 			},
 			nextStep(i){
