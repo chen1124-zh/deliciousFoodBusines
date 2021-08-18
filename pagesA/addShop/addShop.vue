@@ -228,7 +228,8 @@
 					addIncome:0,
 					addOrderNum:0,
 					shopNum:0,
-					ssProduct:''
+					ssProduct:'',
+					businessName:''
 				}
 				
 				

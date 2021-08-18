@@ -382,6 +382,7 @@
 		background: #ccc;
 		border-radius: 50rpx;
 		margin-right: 10rpx;
+		overflow: hidden;
 	}
 	
 	.often_function{

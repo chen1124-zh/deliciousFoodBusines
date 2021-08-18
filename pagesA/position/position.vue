@@ -349,6 +349,64 @@
 						})
 						
 						
+					}else{
+						uni.canvasToTempFilePath({
+							fileType: "jpg",
+							canvasId: 'img',
+							success: (res)=> {
+								
+								
+								 uni.uploadFile({
+								  url : 'http://47.113.217.251:8080/user/fileUpload',
+								  filePath: res.tempFilePath,
+								  name: 'file',
+								 
+								  success: (uploadFileRes)=> {
+									  console.log(uploadFileRes.data)
+									  
+									  var d = uploadFileRes.data.substring(1,uploadFileRes.data.length-1)
+									  // this.img = uploadFileRes.data
+										this.z.map((item,index)=>{
+											
+											var data = {
+												storeId:this.shopData.id||'',  //店铺ID
+												seatImg:d||'',    //桌位图
+												seatType:item.packages||0,   //桌位类型
+												seatName:item.name||'',    //桌位名称
+												seatStatus:item.color=='#F04040'?1:item.color=='#3ACE1B'?2:0||0,   //桌位状态
+												seatSuggest:item.introduce||'',   //桌位介绍
+												top:item.top||0,
+												left:item.left||0
+											}
+											
+											Api.addSeat(data).then(res => {
+												console.log('res',res);
+												
+											}).catch(err => {
+												uni.showToast({
+													title: err.msg,
+													icon: 'none'
+												})
+											});
+											
+											
+										})
+								  }
+								});
+								// 在H5平台下，tempFilePath 为 base64
+								
+								// if(index == this.z.length-1){
+									uni.showToast({
+										title:'添加成功',
+										icon: 'none'
+									})
+									uni.navigateBack({
+										delta:-1
+									})
+								// }
+								
+							}
+						})
 					}
 				}).catch(err => {
 					uni.showToast({

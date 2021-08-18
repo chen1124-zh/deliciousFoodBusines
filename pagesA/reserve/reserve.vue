@@ -12,7 +12,7 @@
 		<view  style="margin-bottom:150rpx;" v-if="select == 0">
 			<view class="" style="display: flex;flex-wrap: wrap;">
 				<view class="choice">
-					<view class="icon">
+					<view class="icon" :style="{'background': administration?'#028EFF':'#C7C7C7'}" @click="administration = !administration">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="">
@@ -20,7 +20,7 @@
 					</view>                             
 				</view>
 				<view class="choice">
-					<view class="icon">
+					<view class="icon" :style="{'background': optional?'#028EFF':'#C7C7C7'}" @click="optional = !optional">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="">
@@ -29,7 +29,7 @@
 					
 				</view>
 				<view class="choice">
-					<view class="icon">
+					<view class="icon" :style="{'background': meeting?'#028EFF':'#C7C7C7'}" @click="meeting = !meeting">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="">
@@ -38,7 +38,7 @@
 					
 				</view>
 				<view class="choice">
-					<view class="icon">
+					<view class="icon" :style="{'background': snacks?'#028EFF':'#C7C7C7'}"  @click="snacks = !snacks">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="">
@@ -47,7 +47,7 @@
 					
 				</view>
 				<view class="choice">
-					<view class="icon">
+					<view class="icon" :style="{'background': vip?'#028EFF':'#C7C7C7'}" @click="vip = !vip">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="">
@@ -77,7 +77,7 @@
 					早餐
 				</view>
 				<view class="day" style="margin: 10rpx 0;">
-					<view class="icon" :style="{'background': zcTime.status?'#1897FF':'#C7C7C7'}">
+					<view class="icon" :style="{'background': zcTime.status?'#1897FF':'#C7C7C7'}" @click="zcTime.status = true">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
@@ -94,7 +94,7 @@
 				</view>
 				<view class=""  style="display: flex;">
 					<view class="day">
-						<view class="icon" :style="{'background': !zcTime.status?'#1897FF':'#C7C7C7'}">
+						<view class="icon" :style="{'background': !zcTime.status?'#1897FF':'#C7C7C7'}" @click="zcTime.status = false">
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
@@ -143,7 +143,7 @@
 					早茶
 				</view>
 				<view class="day" style="margin: 10rpx 0;">
-					<view class="icon" :style="{'background': zchTime.status?'#1897FF':'#C7C7C7'}">
+					<view class="icon" :style="{'background': zchTime.status?'#1897FF':'#C7C7C7'}" @click="zchTime.status = true">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
@@ -160,7 +160,7 @@
 				</view>
 				<view class=""  style="display: flex;">
 					<view class="day">
-						<view class="icon" :style="{'background': !zchTime.status?'#1897FF':'#C7C7C7'}">
+						<view class="icon" :style="{'background': !zchTime.status?'#1897FF':'#C7C7C7'}"  @click="zchTime.status = false">
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
@@ -210,7 +210,7 @@
 					午餐
 				</view>
 				<view class="day" style="margin: 10rpx 0;">
-					<view class="icon" :style="{'background': wcTime.status?'#1897FF':'#C7C7C7'}">
+					<view class="icon" :style="{'background': wcTime.status?'#1897FF':'#C7C7C7'}"  @click="wcTime.status = true">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
@@ -227,7 +227,7 @@
 				</view>
 				<view class=""  style="display: flex;">
 					<view class="day">
-						<view class="icon" :style="{'background': !wcTime.status?'#1897FF':'#C7C7C7'}">
+						<view class="icon" :style="{'background': !wcTime.status?'#1897FF':'#C7C7C7'}" @click="wcTime.status = false">
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
@@ -281,7 +281,7 @@
 					晚餐
 				</view>
 				<view class="day" style="margin: 10rpx 0;">
-					<view class="icon" :style="{'background': wcnTime.status?'#1897FF':'#C7C7C7'}">
+					<view class="icon" :style="{'background': wcnTime.status?'#1897FF':'#C7C7C7'}"  @click="wcnTime.status = true">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
@@ -298,7 +298,7 @@
 				</view>
 				<view class=""  style="display: flex;">
 					<view class="day">
-						<view class="icon" :style="{'background': !wcnTime.status?'#1897FF':'#C7C7C7'}">
+						<view class="icon" :style="{'background': !wcnTime.status?'#1897FF':'#C7C7C7'}"  @click="wcnTime.status = false">
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
@@ -352,7 +352,7 @@
 					夜宵
 				</view>
 				<view class="day" style="margin: 10rpx 0;">
-					<view class="icon" :style="{'background': yxTime.status?'#1897FF':'#C7C7C7'}">
+					<view class="icon" :style="{'background': yxTime.status?'#1897FF':'#C7C7C7'}"  @click="yxTime.status = true">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
@@ -369,7 +369,7 @@
 				</view>
 				<view class=""  style="display: flex;">
 					<view class="day">
-						<view class="icon" :style="{'background': !yxTime.status?'#1897FF':'#C7C7C7'}">
+						<view class="icon" :style="{'background': !yxTime.status?'#1897FF':'#C7C7C7'}" @click="yxTime.status = false">
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
@@ -449,7 +449,7 @@
 			
 			<view class="meal">
 				<view class="day" style="margin: 10rpx 0;">
-					<view class="icon" :style="{'background': DTime.status?'#1897FF':'#C7C7C7'}">
+					<view class="icon" :style="{'background': DTime.status?'#1897FF':'#C7C7C7'}" @click="DTime.status = true">
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
@@ -466,7 +466,7 @@
 				</view>
 				<view class=""  style="display: flex;">
 					<view class="day">
-						<view class="icon" :style="{'background': !DTime.status?'#1897FF':'#C7C7C7'}">
+						<view class="icon" :style="{'background': !DTime.status?'#1897FF':'#C7C7C7'}" @click="DTime.status = false">
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
@@ -554,9 +554,13 @@
 	export default {
 		data() {
 			return {
-				packageStatuc:{
-					
-				},
+				administration:false,
+				optional:false,
+				meeting:false,
+				snacks:false,
+				vip:false,
+				
+				
 				select:0,
 				type: true,
 				DTime:{
@@ -623,7 +627,7 @@
 				},
 				yxTime:{
 					name:'夜宵',
-					status:true,
+					status:true,	
 					today:{
 						time:'12:00'
 					},
@@ -753,42 +757,43 @@
 				// Integer yxBookDay1;     //宵夜预定天数1
 				// Integer yxBookDay2;     //宵夜预定天数2
 				// Integer yxNowTimeBook;   //宵夜今天预定时间
-				
+				console.log(1)
 				this.shop.bookSetUp = this.select
 				this.shop.seat = this.itemType
-				this.shop.zcTimeType = this.zcTime.status?1:0
-				this.shop.zcBookHour = this.zcTime.beApart
-				this.shop.zcBookDay1 = this.zcTime.sDay
-				this.shop.zcBookDay2 = this.zcTime.eDay
-				this.shop.zcNowTimeBook =  this.zcTime.time
+				this.shop.zcTimeType = this.zcTime.status?'1':'0'
+				this.shop.zcBookHour = this.zcTime.beApart.time
+				this.shop.zcBookDay1 = this.zcTime.beApart.sDay+''
+				this.shop.zcBookDay2 = this.zcTime.beApart.eDay+''
+				this.shop.zcNowTimeBook =  this.zcTime.today.time
+				
+				console.log(2)
+				this.shop.zchTimeType = this.zchTime.status?'1':'0'
+				this.shop.zchBookHour = this.zchTime.beApart.time
+				this.shop.zchBookDay1 = this.zchTime.beApart.sDay+''
+				this.shop.zchBookDay2 = this.zchTime.beApart.eDay+''
+				this.shop.zchNowTimeBook =  this.zchTime.today.time
 				
 				
-				this.shop.zchTimeType = this.zchhTime.status?1:0
-				this.shop.zchBookHour = this.zchTime.beApart
-				this.shop.zchBookDay1 = this.zchTime.sDay
-				this.shop.zchBookDay2 = this.zchTime.eDay
-				this.shop.zchNowTimeBook =  this.zchTime.time
+				console.log(3)
+				this.shop.wcTimeType = this.wcTime.status?'1':'0'
+				this.shop.wcBookHour = this.wcTime.beApart.time
+				this.shop.wcBookDay1 = this.wcTime.beApart.sDay+''
+				this.shop.wcBookDay2 = this.wcTime.beApart.eDay+''
+				this.shop.wcNowTimeBook =  this.wcTime.today.time
 				
+				console.log(4)
+				this.shop.wcnTimeType = this.wcnTime.status?'1':'0'
+				this.shop.wcnBookHour = this.wcnTime.beApart.time
+				this.shop.wcnBookDay1 = this.wcnTime.beApart.sDay+''
+				this.shop.wcnBookDay2 = this.wcnTime.beApart.eDay+''
+				this.shop.wcnNowTimeBook =  this.wcnTime.today.time
 				
-				
-				this.shop.wcTimeType = this.wcTime.status?1:0
-				this.shop.wcBookHour = this.wcTime.beApart
-				this.shop.wcBookDay1 = this.wcTime.sDay
-				this.shop.wcBookDay2 = this.wcTime.eDay
-				this.shop.wcNowTimeBook =  this.wcTime.time
-				
-				
-				this.shop.wcnTimeType = this.wcnTime.status?1:0
-				this.shop.wcnBookHour = this.wcnTime.beApart
-				this.shop.wcnBookDay1 = this.wcnTime.sDay
-				this.shop.wcnBookDay2 = this.wcnTime.eDay
-				this.shop.wcnNowTimeBook =  this.wcnTime.time
-				
-				this.shop.yxTimeType = this.yxTime.status?1:0
-				this.shop.yxBookHour = this.yxTime.beApart
-				this.shop.yxBookDay1 = this.yxTime.sDay
-				this.shop.yxBookDay2 = this.yxTime.eDay
-				this.shop.yxNowTimeBook =  this.yxTime.time
+				console.log(5)
+				this.shop.yxTimeType = this.yxTime.status?'1':'0'
+				this.shop.yxBookHour = this.yxTime.beApart.time
+				this.shop.yxBookDay1 = this.yxTime.beApart.sDay+''
+				this.shop.yxBookDay2 = this.yxTime.beApart.eDay+''
+				this.shop.yxNowTimeBook =  this.yxTime.today.time
 				
 				
 				var data = this.shop
