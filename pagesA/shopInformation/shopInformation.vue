@@ -58,7 +58,14 @@
 			}
 		},
 		onLoad() {
-			this.shopData = uni.getStorageSync('shopData');
+			var tempshop = uni.getStorageSync('shopDatas')
+			var shops
+			if(tempshop == ''){
+				shops = uni.getStorageSync('shopData')
+			}else{
+				shops = tempshop
+			}
+			this.shopData = shops
 			this.shopicon = this.shopData.storeLogo
 			this.storePhoto = this.shopData.storePhoto
 			this.storeIntroductImg = this.shopData.storeIntroductImg

@@ -60,7 +60,14 @@
 			}
 		},
 		onLoad(op) {
-			this.shopData = uni.getStorageSync('shopData')
+			var tempshop = uni.getStorageSync('shopDatas')
+			var shops
+			if(tempshop == ''){
+				shops = uni.getStorageSync('shopData')
+			}else{
+				shops = tempshop
+			}
+			this.shopData = shops
 			this.type = op.type
 			if(op.type == 1){
 				if(this.shopData.foodLabel){

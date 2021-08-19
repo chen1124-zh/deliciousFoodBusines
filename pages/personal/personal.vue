@@ -247,6 +247,11 @@
 				}
 			},
 			laoutJump(index){
+				if(index == 0){
+					uni.removeStorage({
+						key:'shopDatas'
+					})
+				}
 				uni.navigateTo({
 					url:this.often[index].path
 				})

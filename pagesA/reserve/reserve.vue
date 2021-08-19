@@ -645,7 +645,14 @@
 			}
 		},
 		onLoad() {
-			this.shop = uni.getStorageSync('shopData');
+			var tempshop = uni.getStorageSync('shopDatas')
+			var shops
+			if(tempshop == ''){
+				shops = uni.getStorageSync('shopData')
+			}else{
+				shops = tempshop
+			}
+			this.shop = shops
 			this.getSeat()
 		},
 		components:{
@@ -757,7 +764,7 @@
 				// Integer yxBookDay1;     //宵夜预定天数1
 				// Integer yxBookDay2;     //宵夜预定天数2
 				// Integer yxNowTimeBook;   //宵夜今天预定时间
-				console.log(1)
+				
 				this.shop.bookSetUp = this.select
 				this.shop.seat = this.itemType
 				this.shop.zcTimeType = this.zcTime.status?'1':'0'
@@ -766,29 +773,24 @@
 				this.shop.zcBookDay2 = this.zcTime.beApart.eDay+''
 				this.shop.zcNowTimeBook =  this.zcTime.today.time
 				
-				console.log(2)
 				this.shop.zchTimeType = this.zchTime.status?'1':'0'
 				this.shop.zchBookHour = this.zchTime.beApart.time
 				this.shop.zchBookDay1 = this.zchTime.beApart.sDay+''
 				this.shop.zchBookDay2 = this.zchTime.beApart.eDay+''
 				this.shop.zchNowTimeBook =  this.zchTime.today.time
 				
-				
-				console.log(3)
 				this.shop.wcTimeType = this.wcTime.status?'1':'0'
 				this.shop.wcBookHour = this.wcTime.beApart.time
 				this.shop.wcBookDay1 = this.wcTime.beApart.sDay+''
 				this.shop.wcBookDay2 = this.wcTime.beApart.eDay+''
 				this.shop.wcNowTimeBook =  this.wcTime.today.time
 				
-				console.log(4)
 				this.shop.wcnTimeType = this.wcnTime.status?'1':'0'
 				this.shop.wcnBookHour = this.wcnTime.beApart.time
 				this.shop.wcnBookDay1 = this.wcnTime.beApart.sDay+''
 				this.shop.wcnBookDay2 = this.wcnTime.beApart.eDay+''
 				this.shop.wcnNowTimeBook =  this.wcnTime.today.time
 				
-				console.log(5)
 				this.shop.yxTimeType = this.yxTime.status?'1':'0'
 				this.shop.yxBookHour = this.yxTime.beApart.time
 				this.shop.yxBookDay1 = this.yxTime.beApart.sDay+''
