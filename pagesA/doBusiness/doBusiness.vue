@@ -35,7 +35,16 @@
 						
 						
 						<view class="" style="display: flex;align-items: center; margin:20rpx 50rpx;">
-							<radio :value="item.value" :checked="index === current" /> </text>{{item.name}}<text class="time" v-if="index==0">{{item.stime}}</text><text v-if="index==0"> 至</text><text class="time" v-if="index==0">{{item.etime}}</text>
+							<radio :value="item.value" :checked="index === current" /> </text>{{item.name}}
+							
+							<picker mode="time" :value="item.stime" start="00:01" end="23:59" @click="dian(index,'s')" @change="bindSTimeChange">
+								<view class="time"  v-if="index==0">{{item.stime}}</view>
+							</picker>
+							<text v-if="index==0"> 至</text>
+							<picker mode="time" :value="item.etime" start="00:01" end="23:59" @click="dian(index,'s')" @change="bindDTimeChange">
+								<view class="time"  v-if="index==0">{{item.etime}}</view>
+							</picker>
+							<!-- <text class="time" v-if="index==0">{{item.etime}}</text> -->
 						</view>
 					</label>
 				</radio-group>
@@ -50,12 +59,21 @@
 				
 				
 				 <checkbox-group @change="checkboxChange">
-					 <label class="uni-list-cell uni-list-cell-pd" v-for="item in items" :key="item.value">
+					 <label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in items" :key="item.value">
 						 <view>
 							 
 						 </view>
 						 <view style="display: flex;align-items: center;margin:20rpx 100rpx;">
-						 	<checkbox :value="item.value" :checked="item.checked" :disabled='item.disabled'/>{{item.name}}<text class="time">{{item.stime}}</text>至<text class="time">{{item.etime}}</text>
+						 	<checkbox :value="item.value" :checked="item.checked" :disabled='item.disabled'/>{{item.name}}
+							
+							<picker mode="time" :value="item.stime" start="00:01" end="23:59" @click.stop="dian(index,'s')" @change="bindISTimeChange">
+								<view class="time">{{item.stime}}</view>
+							</picker>
+							至
+							<picker mode="time" :value="item.etime" start="00:01" end="23:59" @click.stop="dian(index,'s')" @change="bindIDTimeChange">
+								<view class="time">{{item.etime}}</view>
+							</picker>
+							<!-- <text class="time">{{item.etime}}</text> -->
 						 </view>
 					 </label>
 				 </checkbox-group>
@@ -118,6 +136,7 @@
 					stime:'',
 					etime:''
 				}],
+				Bindex:0,
 				items: [{
 						value: '8',
 						name: '上午',
@@ -225,6 +244,21 @@
 					})
 				}
 				
+			},
+			dian(index){
+				this.Bindex = index
+			},
+			bindSTimeChange(e){
+				this.bz[this.Bindex].stime = e.target.value
+			},
+			bindDTimeChange(e){
+				this.bz[this.Bindex].etime = e.target.value
+			},
+			bindISTimeChange(e){
+				this.items[this.Bindex].stime = e.target.value
+			},
+			bindIDTimeChange(e){
+				this.items[this.Bindex].etime = e.target.value
 			},
 			opData(){
 				console.log(this.bz)

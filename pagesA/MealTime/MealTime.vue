@@ -15,15 +15,18 @@
 			</view>
 			<view 
 			style="display: flex;align-items: center; border: 1rpx solid #f0f0f0;padding: 10rpx 20rpx;border-radius: 10rpx;">
-				<view class="" style="color: #999;">
-					{{item.stime}}
-				</view>
+				<!-- <view class="" style="color: #999;"> -->
+				<picker mode="time" :value="item.stime" start="00:01" end="23:59" @click.stop="dian(index,'s')" @change="bindSTimeChange">
+					<view style="color: #999;">{{item.stime}}</view>
+				</picker>
+					<!-- {{item.stime}} -->
+				<!-- </view> -->
 				<view class="" style="margin:0 20rpx;">
 					至
 				</view>
-				<view class="" style="color: #999;">
-					{{item.etime}}
-				</view>
+				<picker mode="time" :value="item.etime" start="00:01" end="23:59" @click.stop="dian(index,'e')" @change="bindDTimeChange">
+					<view style="color: #999;">{{item.etime}}</view>
+				</picker>
 			</view>
 		</view>
 		
@@ -76,16 +79,26 @@
 						select:false
 					}
 				],
-				shopData:''
+				shopData:'',
+				index:0
 			}
 		},
 		onLoad() {
 			this.shopData = uni.getStorageSync('shopData')
 		},
 		methods: {
+			dian(index,se){
+				this.index = index
+			},
+			bindSTimeChange(e){
+				this.typeList[this.index].stime = e.target.value
+			},
+			bindDTimeChange(e){
+				this.typeList[this.index].etime = e.target.value
+			},
 			s(index){
 				this.typeList[index].select = !this.typeList[index].select
-				console.log(this.typeList)
+				// console.log(this.typeList)
 			},
 			ushopData(){
 				this.shopData.timeType = JSON.stringify(this.typeList)
