@@ -274,6 +274,7 @@
 										data: {           
 											"code":code,
 											"type":2, 
+											"addTotal":0,
 											"rawData":{
 												"nickName":res.userInfo.nickName,
 												"mobile":"",
