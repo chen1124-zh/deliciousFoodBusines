@@ -13,7 +13,7 @@
 						<image :src="user.images" mode="" style="width: 100%;height: 100%;"></image>
 					</view>
 					<view class="user_name">
-						{{user.nickName}}
+						{{user.nickName || "未登陆"}}
 					</view>
 				</view>
 			</view>
@@ -25,7 +25,7 @@
 			</view>
 			<view class="bang">
 				<view class="" style="font-size: 36rpx;">
-					￥12312
+					￥{{profit}}
 				</view>
 				<view class="" style="font-size: 20rpx;">
 					累计收益
@@ -34,23 +34,23 @@
 			<view class="achievement">
 				<view class="">
 					<view class="achievement_num">
-						32425
+						{{today}}
 					</view>
 					<view class="achievement_name">
-						就餐人数
+						今日收入
 					</view>
 				</view>
 				<view class="">
 					<view class="achievement_num">
-						32425
+						{{orderNum}}
 					</view>
 					<view class="achievement_name">
-						就餐人数
+						今日订单
 					</view>
 				</view>
 				<view class="">
 					<view class="achievement_num">
-						32425
+						{{eat}}
 					</view>
 					<view class="achievement_name">
 						就餐人数
@@ -70,10 +70,10 @@
 					</view>
 					<view class="">
 						<view class="store_name">
-							{{shopData.storeName}}
+							{{shopData.storeName || "未登录"}}
 						</view>
 						<view class="follow">
-							关注人
+							关注{{follow}}人
 						</view>
 					</view>
 				</view>
@@ -88,7 +88,7 @@
 								菜品
 							</view>
 							<view class="people_num">
-								12
+								{{food}}道
 							</view>
 						</view>
 					</view>
@@ -101,7 +101,7 @@
 								套餐
 							</view>
 							<view class="people_num">
-								12
+								{{set}}套
 							</view>
 						</view>
 					</view>
@@ -114,7 +114,7 @@
 								餐位
 							</view>
 							<view class="people_num">
-								12
+								{{table}}桌
 							</view>
 						</view>
 					</view>
@@ -124,28 +124,28 @@
 		
 	
 		<view class="static_num">
-			<view class="static_name">
-				待接单
+			<view :class="orderIndex == 0?'select_static_name':'static_name'" @click="orderIndex = 0">
+				待接单({{orderListNum.waitingList}})
 			</view>
-			<view class="static_name">
-				待配送
+			<view :class="orderIndex == 1?'select_static_name':'static_name'" @click="orderIndex = 1">
+				待配送({{orderListNum.toBeDelivered}})
 			</view>
-			<view class="static_name">
-				配送中
+			<view :class="orderIndex == 2?'select_static_name':'static_name'" @click="orderIndex = 2">
+				配送中({{orderListNum.distribution}})
 			</view>
-			<view class="static_name">
-				待就餐
+			<view :class="orderIndex == 3?'select_static_name':'static_name'" @click="orderIndex = 3">
+				待就餐({{orderListNum.waitingEat}})
 			</view>
-			<view class="static_name">
+			<!-- <view class="static_name">
 				售后
-			</view>
+			</view> -->
 		</view>
 		
 		<view class="good_box">
 			<view class="good_item">
 				<view class="good_item_top">
 					<view class="">
-						12:30
+						<text class="mode">外卖</text> 12:30送达
 					</view>
 					<view class="">
 						待接单
@@ -157,7 +157,7 @@
 						
 					</view>
 					<view class="user_N">
-						<view class="">
+						<view class="user_information">
 							
 							<view class="user_Name">
 								张
@@ -175,8 +175,8 @@
 					
 					<view class="requirement">
 						送货上门
-						<view class="phone_img">
-							
+						<view class="phone_img" style="margin: 20rpx auto 20rpx;">
+							<image src="../../static/phone.png" style="width: 100%;height: 100%;text-align: center;" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -193,7 +193,7 @@
 					</view>
 					<view class="order_price_num">
 						<view class="order_item_price">
-							25.5
+							￥25.5
 						</view>
 						<view class="order_item_num">
 							共4件
@@ -202,10 +202,10 @@
 				</view>
 				
 				<view class="agree">
-					<view class="">
+					<view class="" style="width: 30%;color: #999;">
 						拒绝
 					</view>
-					<view class="">
+					<view class="" style="flex: 1;background: #10C5A5;color: #fff;">
 						接单
 					</view>
 				</view>
@@ -295,7 +295,22 @@
 				userSelectImg:false,
 				Distribution:false,
 				shopData:null,
-				shopDataList:null
+				shopDataList:null,
+				profit:0,
+				today:0,
+				orderNum:0,
+				eat:0,
+				follow:0,
+				food:0,
+				set:0,
+				table:0,
+				orderListNum:{
+					waitingList:0,
+					toBeDelivered:0,
+					distribution:0,
+					waitingEat:0
+				},
+				orderIndex:0,
 			}
 		},
 		onLoad() {
@@ -322,6 +337,8 @@
 					return
 				}
 				this.getStoreList()
+				
+				this.getOrderList() 
 			}
 			
 		},
@@ -402,9 +419,95 @@
 				}
 			},
 			userClick(){
+				console.log(this.user)
+				if(this.user == ''){
+					uni.getUserProfile({
+						desc: '登录',
+						success: (res) => {
+							
+							uni.login({
+								success: (ress) => {
+									let code = ress.code
+									uni.request({
+										url: 'http://47.113.217.251:8080/user/save', //仅为示例，并非真实接口地址。
+										method:"POST",
+										data: {           
+											"code":code,
+											"type":2,
+											"rawData":{
+												"nickName":res.userInfo.nickName,
+												"mobile":"",
+												"isVip":0,
+												"images":res.userInfo.avatarUrl,
+												"userName":"",
+												"password":"",
+												"accountType":2,
+												"gender":res.userInfo.gender,
+												"addTotal":0,
+												"orderNum":0,
+												"accountMoney":0,
+												"isvipLevel":''
+											}
+										},
+										success: (resdata) => {
+											this.user = resdata.data.data.data
+											uni.setStorageSync('token',resdata.data.data.data.openId);
+											uni.setStorageSync('user',resdata.data.data.data);
+											
+											if(this.user.status == 0){
+												uni.removeStorageSync('addMap')
+												uni.navigateTo({
+													url:'../../pagesA/Induction/Induction'
+												})
+												return
+											}
+											
+											if(this.user.status == 1){
+												
+												uni.navigateTo({
+													url:'../../pagesA/examine/examine'
+												})
+												return
+											}
+										
+											// Api.getStoreList({userId:resdata.data.data.data.openId}).then(res => {
+											// 	// console.log('res',res);
+											// 	if(res.data.length == 0){
+											// 		uni.showToast({
+											// 			title:'暂无店铺',
+											// 			icon:'none'
+											// 		})
+											// 		return
+											// 	}
+											// 	than.shopData = res.data[0];
+											// 	uni.setStorageSync('shopData',than.shopData)
+											// }).catch(err => {
+											// 	uni.showToast({
+											// 		title: err.msg,
+											// 		icon: 'none'
+											// 	})
+											// });
+										}
+									});
+									
+								},
+							})
+						},
+						fail() {
+							uni.showToast({
+								title: '需要授权后才能继续',
+								duration: 1500,
+								icon: 'none'
+							})
+						}
+					})
+					return
+				}
+				
 				this.match = true;
 				this.userSelectImg = true;
-				this.Distribution = false
+				this.Distribution = false;
+				this.shopShow = false
 			},
 			gitPhone(){
 				uni.showActionSheet({
@@ -415,6 +518,24 @@
 				    fail: function (res) {
 				        console.log(res.errMsg);
 				    }
+				});
+			},
+		
+			getOrderList(){
+				
+				var data = {
+					userId:'',
+					storeId:this.user.id
+				}
+				
+				Api.getOrderList(data).then(res => {
+					console.log('res',res);
+					
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
 				});
 			}
 		}
@@ -567,23 +688,31 @@
 	
 	.static_name{
 		flex: 1;
-		/* background: #aa0000; */
-		box-shadow: 0rpx 0rpx 2rpx #888888;
+		background: #fff;
+		border: 1rpx solid #f0f0f0;
 		text-align: center;
 		padding: 20rpx;
 		font-size: 30rpx;
 		border-radius: 20rpx 20rpx 0 20rpx;
 	}
 	
-	.good_box{
-		
+	.select_static_name{
+		flex: 1;
+		background: #270546;
+		color: #fff;
+		border: 1rpx solid #f0f0f0;
+		text-align: center;
+		padding: 20rpx;
+		font-size: 30rpx;
+		border-radius: 20rpx 20rpx 0 20rpx;
 	}
 	
 	.good_item{
 		padding: 20rpx;
 		margin: 30rpx;
 		background-color: #fff;
-		box-shadow: 1rpx 1rpx 1rpx #888888;
+		box-shadow: 0rpx 0rpx 20rpx #f0f0f0;
+		border-radius: 20rpx;
 	}
 	
 	
@@ -603,6 +732,7 @@
 		height: 50rpx;
 		background: #000000;
 		margin-right: 10rpx;
+		border-radius: 50%;
 	}
 	
 	.user_N{
@@ -654,10 +784,11 @@
 	
 	.agree view{
 		margin: 0 10rpx;
-		flex: 1;
+		/* flex: 1; */
 		padding: 10rpx 0;
 		text-align: center;
-		border: 1rpx solid #ccc;
+		border: 1rpx solid #f0f0f0;
+		border-radius: 20rpx;
 		/* padding: 10rpx; */
 	}
 	
@@ -773,4 +904,33 @@
 		color: #fff;
 	}
 	
+	.mode{
+		display: inline-block;
+		border: 1rpx solid #53C2FE;
+		color: #53C2FE;
+		border-radius: 10rpx;
+		font-size: 28rpx;
+		padding:0rpx 10rpx;
+		margin-right: 10rpx;
+	}
+		
+	.user_information{
+		display: flex;
+		color: #958E8E;
+		font-size: 28rpx;
+	}
+	
+	.user_Name{
+		margin-right: 20rpx;
+	}
+	
+	.requirement{
+		font-size: 25rpx;
+	}
+	
+	
+	.phone_img{
+		width: 40rpx;
+		height: 40rpx;
+	}
 </style>

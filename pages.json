@@ -219,7 +219,7 @@
 		    },
 			{
 			    "pagePath": "pages/business/business",
-				"text":"商家",
+				"text":"商品",
 				"iconPath":"static/business.png",
 				"selectedIconPath":"static/businessN.png"
 			},

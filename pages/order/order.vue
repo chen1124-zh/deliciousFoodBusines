@@ -15,7 +15,7 @@
 			<view class="good_item">
 				<view class="good_item_top">
 					<view class="">
-						12:30
+						<text class="mode">外卖</text> 12:30送达
 					</view>
 					<view class="">
 						待接单
@@ -27,7 +27,7 @@
 						
 					</view>
 					<view class="user_N">
-						<view class="">
+						<view class="user_information">
 							
 							<view class="user_Name">
 								张
@@ -44,9 +44,9 @@
 					
 					
 					<view class="requirement">
-						送货上门
-						<view class="phone_img">
-							
+						<!-- 送货上门 -->
+						<view class="phone_img" style="margin: 20rpx auto 20rpx;">
+							<image src="../../static/phone.png" style="width: 100%;height: 100%;text-align: center;" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -63,7 +63,7 @@
 					</view>
 					<view class="order_price_num">
 						<view class="order_item_price">
-							25.5
+							￥25.5
 						</view>
 						<view class="order_item_num">
 							共4件
@@ -71,75 +71,17 @@
 					</view>
 				</view>
 				
+				<!-- <view class="agree">
+					<view class="" style="width: 30%;color: #999;">
+						拒绝
+					</view>
+					<view class="" style="flex: 1;background: #10C5A5;color: #fff;">
+						接单
+					</view>
+				</view> -->
 				
 				
 			</view>
-			
-			<view class="good_item">
-				<view class="good_item_top">
-					<view class="">
-						12:30
-					</view>
-					<view class="">
-						待接单
-					</view>
-				</view>
-				<view class="user">
-					
-					<view class="user_logo">
-						
-					</view>
-					<view class="user_N">
-						<view class="">
-							
-							<view class="user_Name">
-								张
-							</view>
-							<view class="user_phone">
-								123123123
-							</view>
-						</view>
-						<view class="address">
-							广州
-						</view>
-					</view>
-					
-					
-					
-					<view class="requirement">
-						送货上门
-						<view class="phone_img">
-							
-						</view>
-					</view>
-				</view>
-				<view class="order_miao">
-					<view class="order_img_name">
-						<view class="order_img">
-							<view class="order_item_img">
-								
-							</view>
-						</view>
-						<view class="order_item_name">
-							鱼蛋分、肥牛
-						</view>
-					</view>
-					<view class="order_price_num">
-						<view class="order_item_price">
-							25.5
-						</view>
-						<view class="order_item_num">
-							共4件
-						</view>
-					</view>
-				</view>
-				
-				
-				
-			</view>
-			
-			
-			
 		</view>
 	</view>
 </template>
@@ -181,6 +123,11 @@
 </script>
 
 <style>
+	
+	.content{
+		background: #FAFAFA;
+	}
+	
 	.good_box{
 		
 	}
@@ -189,7 +136,8 @@
 		padding: 20rpx;
 		margin: 30rpx;
 		background-color: #fff;
-		box-shadow: 1rpx 1rpx 1rpx #888888;
+		box-shadow: 0rpx 0rpx 20rpx #f0f0f0;
+		border-radius: 20rpx;
 	}
 	
 	
@@ -209,6 +157,7 @@
 		height: 50rpx;
 		background: #000000;
 		margin-right: 10rpx;
+		border-radius: 50%;
 	}
 	
 	.user_N{
@@ -250,6 +199,35 @@
 		text-align: center;
 	}
 	
+	.mode{
+		display: inline-block;
+		border: 1rpx solid #53C2FE;
+		color: #53C2FE;
+		border-radius: 10rpx;
+		font-size: 28rpx;
+		padding:0rpx 10rpx;
+		margin-right: 10rpx;
+	}
+	
+	.user_information{
+		display: flex;
+		color: #958E8E;
+		font-size: 28rpx;
+	}
+	
+	.user_Name{
+		margin-right: 20rpx;
+	}
+	
+	.requirement{
+		font-size: 25rpx;
+	}
+	
+	
+	.phone_img{
+		width: 40rpx;
+		height: 40rpx;
+	}
 	
 	
 	

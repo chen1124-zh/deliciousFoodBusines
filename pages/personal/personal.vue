@@ -273,8 +273,7 @@
 										method:"POST",
 										data: {           
 											"code":code,
-											"type":2, 
-											"addTotal":0,
+											"type":2,
 											"rawData":{
 												"nickName":res.userInfo.nickName,
 												"mobile":"",
@@ -283,7 +282,11 @@
 												"userName":"",
 												"password":"",
 												"accountType":2,
-												"gender":res.userInfo.gender
+												"gender":res.userInfo.gender,
+												"addTotal":0,
+												"orderNum":0,
+												"accountMoney":0,
+												"isvipLevel":''
 											}
 										},
 										success: (resdata) => {

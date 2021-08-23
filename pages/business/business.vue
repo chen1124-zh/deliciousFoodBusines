@@ -148,7 +148,8 @@
 			}
 		},
 		onShow() {
-			this.getMenuTypeListData()
+			this.getUser()
+			
 			// this.getGoodData()
 		},
 		created() {
@@ -158,6 +159,96 @@
 
 		},
 		methods: {
+			getUser(){
+				var than = this
+				var user = uni.getStorageSync('user')
+				
+				if(user == ''){
+					uni.getUserProfile({
+						desc: '登录',
+						success: (res) => {
+							
+							uni.login({
+								success: (ress) => {
+									let code = ress.code
+									uni.request({
+										url: 'http://47.113.217.251:8080/user/save', //仅为示例，并非真实接口地址。
+										method:"POST",
+										data: {           
+											"code":code,
+											"type":2,
+											"rawData":{
+												"nickName":res.userInfo.nickName,
+												"mobile":"",
+												"isVip":0,
+												"images":res.userInfo.avatarUrl,
+												"userName":"",
+												"password":"",
+												"accountType":2,
+												"gender":res.userInfo.gender,
+												"addTotal":0,
+												"orderNum":0,
+												"accountMoney":0,
+												"isvipLevel":''
+											}
+										},
+										success: (resdata) => {
+											this.user = resdata.data.data.data
+											uni.setStorageSync('token',resdata.data.data.data.openId);
+											uni.setStorageSync('user',resdata.data.data.data);
+											
+											if(this.user.status == 0){
+												uni.removeStorageSync('addMap')
+												uni.navigateTo({
+													url:'../../pagesA/Induction/Induction'
+												})
+												return
+											}
+											
+											if(this.user.status == 1){
+												
+												uni.navigateTo({
+													url:'../../pagesA/examine/examine'
+												})
+												return
+											}
+										
+											// Api.getStoreList({userId:resdata.data.data.data.openId}).then(res => {
+											// 	// console.log('res',res);
+											// 	if(res.data.length == 0){
+											// 		uni.showToast({
+											// 			title:'暂无店铺',
+											// 			icon:'none'
+											// 		})
+											// 		return
+											// 	}
+											// 	than.shopData = res.data[0];
+											// 	uni.setStorageSync('shopData',than.shopData)
+											// }).catch(err => {
+											// 	uni.showToast({
+											// 		title: err.msg,
+											// 		icon: 'none'
+											// 	})
+											// });
+										}
+									});
+									
+								},
+							})
+						},
+						fail() {
+							uni.showToast({
+								title: '需要授权后才能继续',
+								duration: 1500,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					this.getMenuTypeListData()
+				}
+				
+			},
 			sxGoog(index){
 				var data = goodList[index]
 				if(data.productStatus == 1){
