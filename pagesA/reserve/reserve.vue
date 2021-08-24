@@ -870,6 +870,7 @@
 	}
 	
 	.choice{
+		width: 22%;
 		display: flex;
 		/* flex-wrap: wrap; */
 		margin: 10rpx 30rpx;

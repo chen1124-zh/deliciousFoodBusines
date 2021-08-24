@@ -10,7 +10,7 @@
 					
 				</view>
 			</view>
-			<view class="" style="margin:20rpx 50rpx 20rpx 5rpx;">
+			<view class="" style="margin:20rpx 50rpx 20rpx 5rpx;width: 80rpx;">
 				{{item.name}}
 			</view>
 			<view 

@@ -123,7 +123,7 @@
 						menuName:this.menuName,   //菜系名称
 						menuSort:this.menuSort,   //菜系排序
 						productId:'',    //商品id
-						type:1
+						type:0
 					}
 					Api.addMenuType(data).then(res => {
 						console.log(res)
@@ -188,7 +188,10 @@
 				this.shopDataId = uni.getStorageSync('shopData');
 		
 				var data = {
-					 storeId:this.shopDataId.id
+					id:'',
+					productId:'',
+					storeId:this.shopDataId.id,
+					type:0
 				}
 				Api.getMenuTypeList(data).then(res => {
 					than.classifiList = res.data.data

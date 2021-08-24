@@ -19,7 +19,7 @@
 			</view>
 		</view>
 		<view class="" style="display: flex;align-items: center;margin: 20rpx;">
-			超时
+			超出距离每千米
 			<view class="i" style="flex: 1;margin: 0;margin-left: 5rpx;">
 				
 				<input type="number" v-model="shopData.deliveryCost" placeholder="配送时间" />

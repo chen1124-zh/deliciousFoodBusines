@@ -12,9 +12,17 @@
 			</view>
 		</view>
 		<view class="button">
-			<view class="c" @click="classifi">
-				菜单分类
+			<view class="" style="display: flex;margin: 20rpx 0;padding: 0;">
+				
+				<view class="c" @click="classifi">
+					餐时设置
+				</view>
+				
+				<view class="c" @click="classifi">
+					菜单分类
+				</view>
 			</view>
+			
 			<view class="a" @click="addCommodity">
 				添加新商品
 			</view>
@@ -393,6 +401,7 @@
 	.button .c{
 		border: 4rpx solid #10C5A5;
 		color: #10C5A5;
+		margin: 4rpx;
 	}
 	
 	.button .a{

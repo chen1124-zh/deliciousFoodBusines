@@ -4,18 +4,27 @@
 			<view class="user_img">
 				<image :src="shopData.storeLogo" style="width: 100%;height: 100%;" mode=""></image>
 			</view>
-			<view class="">
-				<view class="">
+			<view v-if="user == ''"
+			style="line-height: 130rpx;">
+				未登录
+			</view>
+			<view class="" v-else>
+				<view class="" style="font-size: 44rpx;margin-bottom: 20rpx;">
 					{{shopData.storeName}}
 				</view>
-				<view class="">
-					12312
+				<view class="evaluate" style="font-size: 28rpx;">
+					<text>评价4.8</text><text>月售3035</text> <text>配送约30分钟</text>
+				</view>
+				<view 
+				style="font-size: 26rpx;border-radius: 2rpx;padding: 0 20rpx;border-radius: 20rpx;color: #5EACE7;background: #EEF7FF;display: inline-block;margin: 20rpx 0;">
+					营业时间：9：00-23：00
+					<!-- 12312 -->
 				</view>
 				<view class="">
-					12312
-				</view>
-				<view class="">
-					<text v-for="(item,index) in biao">{{item}}</text>
+					<text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right:20rpx;">123</text>
+					<text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text>
+					<text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text>
+					<!-- <text v-for="(item,index) in biao">{{item}}</text> -->
 					<!-- {{this.shopData.foodItem = this.labellist.join()}} -->
 				</view>
 			</view>
@@ -247,11 +256,22 @@
 				}
 			},
 			laoutJump(index){
+				
+				if(this.user == ''){
+					uni.showToast({
+						title:"请先登录",
+						icon:"none"
+					})
+					return
+				}
+				
 				if(index == 0){
 					uni.removeStorage({
 						key:'shopDatas'
 					})
 				}
+				
+				
 				uni.navigateTo({
 					url:this.often[index].path
 				})
@@ -283,10 +303,7 @@
 												"password":"",
 												"accountType":2,
 												"gender":res.userInfo.gender,
-												"addTotal":0,
-												"orderNum":0,
-												"accountMoney":0,
-												"isvipLevel":''
+				
 											}
 										},
 										success: (resdata) => {
@@ -369,8 +386,9 @@
 	
 	.user_information{
 		display: flex;
-		background: #0D92FF;
+		background: #270546;
 		padding: 40rpx 20rpx 40rpx 40rpx;
+		color: #fff;
 	}
 	
 	.information{
@@ -389,7 +407,7 @@
 		width: 140rpx;
 		height: 140rpx;
 		background: #ccc;
-		border-radius: 50rpx;
+		border-radius: 30rpx;
 		margin-right: 10rpx;
 		overflow: hidden;
 	}
@@ -404,7 +422,7 @@
 		z-index: -1;
 		width: 100%;
 		height: 40rpx;
-		background: #0D92FF;
+		background: #270546;
 	}
 	
 	.often_box{
@@ -597,6 +615,14 @@
 		font-size: 32rpx;
 		margin-left: 40rpx;
 		
+	}
+	
+	.evaluate{
+		font-size: 28rpx;
+	}
+	
+	.evaluate text{
+		margin-right: 20rpx;
 	}
 	
 </style>

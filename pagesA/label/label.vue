@@ -20,6 +20,10 @@
 			自定义标签
 		</view>
 		
+		
+		
+		
+		
 		<view class="Mask" v-if="m">
 			<view class="add_label">
 				<view class="zdy">
@@ -41,6 +45,21 @@
 			</view>
 		</view>
 		
+		
+		
+		<view class="select_box">
+			<view class="title">
+				系统标签
+			</view>
+			<view class="" >
+				<view :class="item.select?'select':'select_item'" v-for="(item,index) in systemLabelList" :key='index' @click="systemSelect(index)">
+					{{item.menuName}}
+				</view>
+				
+			</view>
+		</view>
+		
+		
 		<view class="preservation" @click="uShop">
 			保存
 		</view>
@@ -56,7 +75,8 @@
 				m:false,
 				labellist:[],
 				shopData:'',
-				type:''
+				type:'',
+				systemLabelList:[]
 			}
 		},
 		onLoad(op) {
@@ -114,21 +134,68 @@
 					title:"标签"
 				})
 			}
+			this.getSystemLabel()
+			
 			
 		},
 		methods: {
+			systemSelect(index){
+				this.systemLabelList[index].select = !this.systemLabelList[index].select
+				this.$forceUpdate()
+			},
+			getSystemLabel(){
+				var data = {
+					id:'',
+					productId:'',
+					type:this.type
+				}
+				Api.getMenuTypeList(data).then(res => {
+					this.systemLabelList = res.data.data
+					
+					this.systemLabelList.forEach((item,index)=>{
+						item.select = false
+					})
+				
+					console.log('res',res.data.data);
+					
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+			}, 
 			uShop(){
 				
+				var systemLabel = []
+				
+				for(var i = 0;i<this.systemLabelList.length;i++){
+					if(this.systemLabelList[i].select == true){
+						systemLabel.push({
+							id:this.systemLabelList[i].id,
+							name:this.systemLabelList[i].menuName
+						})
+					}
+					
+				}
+				
+				
+				var tempObj = {
+					system:systemLabel,
+					custom:this.labellist
+				}
+				// console.log(tempObj)
+				// return
 				if(this.type == 1){
-					this.shopData.foodLabel = this.labellist.join()
+					this.shopData.foodLabel = tempObj.join()
 				}else if(this.type == 2){
-					this.shopData.servuceConfiguration = this.labellist.join()
+					this.shopData.servuceConfiguration = tempObj.join()
 				}else if(this.type == 3){
-					this.shopData.foodSort = this.labellist.join()
+					this.shopData.foodSort = tempObj.join()
 				}else if(this.type == 4){
-					this.shopData.appraiseManager = this.labellist.join()
+					this.shopData.appraiseManager = tempObj.join()
 				}else if(this.type == 5){
-					this.shopData.foodItem = this.labellist.join()
+					this.shopData.foodItem = tempObj.join()
 				}
 				
 				
@@ -214,7 +281,7 @@
 		border-radius: 50%;
 		color: #FF1010;
 		background: #fff;
-		    font-size: 28rpx;
+		font-size: 28rpx;
 		width: 30rpx;
 		height: 30rpx;
 		line-height: 30rpx;
@@ -272,5 +339,17 @@
 		text-align: center;
 		padding: 20rpx;
 		margin: 30rpx;
+	}
+	
+	.select{
+		float: left;
+		padding:10rpx 20rpx;
+		border-radius: 10rpx;
+		margin-right: 20rpx;
+		margin-top: 20rpx;
+		position: relative;
+		font-size: 32rpx;
+		background: #10C5A5;
+		color: #fff;
 	}
 </style>
