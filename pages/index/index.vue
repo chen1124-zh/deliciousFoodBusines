@@ -338,7 +338,7 @@
 				}
 				this.getStoreList()
 				
-				this.getOrderList() 
+				
 			}
 			
 		},
@@ -346,6 +346,63 @@
 			this.navigation = this.$store.getters.getNavigation
 		},
 		methods: {
+			selectDayTotalList(){
+				var data = {
+					storeId:this.shopData.id
+				}
+				Api.selectDayTotal(data).then(res => {
+					if(res.data == undefined){
+						this.today = 0
+					}else{
+						this.today = res.data.num
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+				
+				Api.selectOrderTotal(data).then(res => {
+					if(res.data == undefined){
+						this.orderNum = 0
+					}else{
+						this.orderNum = res.data.num
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+				
+				Api.selectPeopleTotal(data).then(res => {
+					if(res.data == undefined){
+						this.eat = 0
+					}else{
+						this.eat = res.data.num
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+				
+				Api.selectAllTotal(data).then(res => {
+					
+					if(res.data == undefined){
+						this.profit = 0
+					}else{
+						this.profit = res.data.num
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+			},
 			qhuang(index){
 				this.shopData = this.shopDataList[index];
 				uni.setStorageSync('shopData',this.shopData);
@@ -356,6 +413,9 @@
 					title:'切换成功',
 					icon:'none'
 				})
+				
+				this.getOrderList();
+				this.selectDayTotalList();
 			},
 			sW(){
 				this.match = true
@@ -408,6 +468,8 @@
 						
 						than.shopData = res.data[0];
 						uni.setStorageSync('shopData',than.shopData)
+						this.selectDayTotalList()
+						this.getOrderList() 
 					}).catch(err => {
 						uni.showToast({
 							title: err.msg,
@@ -416,6 +478,8 @@
 					});
 				}else{
 					than.shopData = tempShopData
+					this.selectDayTotalList()
+					this.getOrderList() 
 				}
 			},
 			userClick(){
@@ -443,6 +507,7 @@
 												"password":"",
 												"accountType":2,
 												"gender":res.userInfo.gender,
+												"name":res.userInfo.nickName,
 												"addTotal":0,
 												"orderNum":0,
 												"accountMoney":0,
@@ -469,24 +534,9 @@
 												})
 												return
 											}
-										
-											// Api.getStoreList({userId:resdata.data.data.data.openId}).then(res => {
-											// 	// console.log('res',res);
-											// 	if(res.data.length == 0){
-											// 		uni.showToast({
-											// 			title:'暂无店铺',
-											// 			icon:'none'
-											// 		})
-											// 		return
-											// 	}
-											// 	than.shopData = res.data[0];
-											// 	uni.setStorageSync('shopData',than.shopData)
-											// }).catch(err => {
-											// 	uni.showToast({
-											// 		title: err.msg,
-											// 		icon: 'none'
-											// 	})
-											// });
+											
+											this.getStoreList()
+											
 										}
 									});
 									

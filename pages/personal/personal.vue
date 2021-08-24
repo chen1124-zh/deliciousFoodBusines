@@ -210,18 +210,11 @@
 			}
 		},
 		onShow() {
-			this.getShopData()
-			var shop = ''
-			shop = uni.getStorageSync('shopData')
-			if(shop!=''){
-				this.getSelectCountProduct()
-			}
-			
 			this.user = uni.getStorageSync('user')
 			if(this.user == ''){
 				
 			}else{
-				
+				console.log(this.user)
 				if(this.user.status == 0){
 					uni.removeStorageSync('addMap')
 					uni.navigateTo({
@@ -240,6 +233,16 @@
 			}
 			
 			
+			this.getShopData()
+			var shop = ''
+			shop = uni.getStorageSync('shopData')
+			if(shop!=''){
+				this.getSelectCountProduct()
+			}
+			
+			
+			
+			
 		},
 		components:{
 			qiunDataCharts
@@ -252,7 +255,11 @@
 				var tempShopData = uni.getStorageSync('shopData');
 				if(tempShopData != ''){
 					this.shopData = tempShopData
-					this.biao = this.shopData.foodItem.split(',')
+					console.log(this.shopData.foodItem)
+					if(this.shopData.foodItem != undefined){
+						this.biao = this.shopData.foodItem.split(',')
+					}
+					
 				}
 			},
 			laoutJump(index){
@@ -303,7 +310,11 @@
 												"password":"",
 												"accountType":2,
 												"gender":res.userInfo.gender,
-				
+												"name":res.userInfo.nickName,
+												"addTotal": 0,
+												"orderNum": 0,
+												"accountMoney": 0,
+												"isvipLevel": ""
 											}
 										},
 										success: (resdata) => {

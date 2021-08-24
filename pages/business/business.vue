@@ -401,7 +401,7 @@
 	.button .c{
 		border: 4rpx solid #10C5A5;
 		color: #10C5A5;
-		margin: 4rpx;
+		margin: 0 4rpx;
 	}
 	
 	.button .a{

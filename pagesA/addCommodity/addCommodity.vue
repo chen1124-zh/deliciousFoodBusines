@@ -103,7 +103,7 @@
 					<text>克</text>
 				</view>
 			</view>
-			<view class="line_box">
+			<!-- <view class="line_box">
 				<view class="">
 					原料
 				</view>
@@ -126,7 +126,7 @@
 				<view class="">
 					<input type="text" v-model="addData.energy" />
 				</view>
-			</view>
+			</view> -->
 			
 		</view>
 		

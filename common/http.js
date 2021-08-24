@@ -155,6 +155,43 @@ function updateProduct (data) {
 }
 
 
+// 获取今天收入
+function selectDayTotal (data) {
+	return request({
+		method: "post", // 请求方式
+		url: 'order/selectDayTotal', // 请求url
+		data: data // 参数
+	})
+}
+
+// 获取今天订单
+function selectOrderTotal (data) {
+	return request({
+		method: "post", // 请求方式
+		url: 'order/selectOrderTotal', // 请求url
+		data: data // 参数
+	})
+}
+
+// 获取就餐人数
+function selectPeopleTotal (data) {
+	return request({
+		method: "post", // 请求方式
+		url: 'order/selectPeopleTotal', // 请求url
+		data: data // 参数
+	})
+}
+
+// 获取累计收益
+function selectAllTotal (data) {
+	return request({
+		method: "post", // 请求方式
+		url: 'order/selectAllTotal', // 请求url
+		data: data // 参数
+	})
+}
+
+
 
 
 
@@ -176,5 +213,9 @@ export default{
 	addSeat,
 	getSeatList,
 	deleteSeat,
-	updateProduct
+	updateProduct,
+	selectDayTotal,
+	selectOrderTotal,
+	selectPeopleTotal,
+	selectAllTotal
 }

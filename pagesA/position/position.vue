@@ -14,21 +14,23 @@
 		
 		
 		<view class="" style="position: relative;">
-			<view class="a" v-for="(item,index) in z" :key='index' :style="{'top':item.top+'px','left':item.left+'px','color':item.color}" :id="item.id" @touchmove="yd">
+			<view class="a" v-for="(item,index) in z" :key='index' :style="{'top':item.top+'rpx','left':item.left+'rpx','color':item.color}" :id="item.id" @touchmove="yd">
 				{{item.name}}
 			</view>
-			<view class="" style="width: 100%;height: 600rpx;">
+			<view class="" id="BImg" style="width: 100%;height: 600rpx;">
 				<image :src="bImg" mode="" style="width: 100%;height: 100%;"></image>
-				
 			</view>
 		</view>
-		
+		<view class="repair" @click="modify = !modify"
+		 :style="{'color':modify?'red':'#07C160'}">
+			修改座位
+		</view>
 		<view class="" style="display: flex;margin: 20rpx 70rpx;" v-if="z.length>0">
 			<view class="tr">
 				<view class="">
 					包厢
 				</view>
-				<view :style="{'color':item.color}" v-for="(item,index) in z" :key='index' v-if="item.packages == 0" @click="Hcoclor(index )">
+				<view :style="{'color':item.color}" v-for="(item,index) in z" :key='index' v-if="item.packages == 0" @click="Hcoclor(modify,index)">
 					{{item.name}}
 				</view>
 			</view>
@@ -36,7 +38,7 @@
 				<view class="">
 					卡座
 				</view>
-				<view :style="{'color':item.color}" v-for="(item,index) in z" :key='index' v-if="item.packages == 1" @click="Hcoclor(index )">
+				<view :style="{'color':item.color}" v-for="(item,index) in z" :key='index' v-if="item.packages == 1" @click="Hcoclor(modify,index)">
 					{{item.name}}
 				</view>
 			</view>
@@ -44,7 +46,7 @@
 				<view class="">
 					大厅
 				</view>
-				<view :style="{'color':item.color}" v-for="(item,index) in z" :key='index' v-if="item.packages == 2" @click="Hcoclor(index )">
+				<view :style="{'color':item.color}" v-for="(item,index) in z" :key='index' v-if="item.packages == 2" @click="Hcoclor(modify,index)">
 					{{item.name}}
 				</view>
 			</view>
@@ -67,7 +69,7 @@
 		<view class="Mask" v-if="addMask">
 			<view class="bai">
 				<view class="tName">
-					添加桌位
+					{{modify?'修改':'添加'}}桌位
 				</view>
 				<view class="inp">
 					<picker mode="selector" :value="packages" :range="packages" range-key="name" @change="change">
@@ -83,11 +85,11 @@
 					<textarea v-model="introduce" placeholder="介绍" style="height: 150rpx;"/>
 				</view>
 				<view class="" style="display: flex;justify-content: space-between;">
-					<view class="an" @click="addMask = false" style="width: 25%; border: 1rpx solid #f0f0f0;color: #999;">
+					<view class="an" @click="addMask = false,modify=false" style="width: 25%; border: 1rpx solid #f0f0f0;color: #999;">
 						取消
 					</view>
-					<view class="an" @click="addData"  style="width: 60%; background: #10C5A5;color: #fff;">
-						确认添加
+					<view class="an" @click="addData(modify)"  style="width: 60%; background: #10C5A5;color: #fff;">
+						确认{{modify?'修改':'添加'}}
 					</view>
 				</view>
 			</view>
@@ -102,11 +104,15 @@
 		data() {
 			return {
 				z:[],
+				sIndex:-1,
 				name:"",
 				introduce:"",
 				bImg:'',
 				index:0,
 				img:'',
+				bwidth:0,
+				bheight:0,
+				modify:false,
 				packages:[
 					{
 						name:'包厢'
@@ -126,12 +132,10 @@
 			}
 		},
 		onUnload(){
-			// console.log(12312321312)
-			
-			
 			
 		},
 		onLoad() {
+			
 			this.index = 0
 			this.z = []
 			var tempshop = uni.getStorageSync('shopDatas')
@@ -141,7 +145,6 @@
 			}else{
 				shops = tempshop
 			}
-			// this.shop = shops
 			this.shopData = shops
 			
 			if(this.shopData == ''){
@@ -185,11 +188,27 @@
 				
 			}
 			
-			
+			let query=uni.createSelectorQuery().in(this);
+			query.select('#BImg').boundingClientRect(data=>{
+								 console.log(data)
+								 
+				this.bwidth = data.width
+				this.bheight = data.height
+			}).exec()
 			
 		},
 		methods: {
-			Hcoclor(index){
+			Hcoclor(modify,index){
+				
+				if(modify){
+					this.sIndex = index
+					this.addMask = true
+					this.packageIndex = this.z[index].packages
+					this.name = this.z[index].name
+					this.introduce = this.z[index].introduce 
+					return
+				}
+				
 				if(this.z[index].color == '#979797'){
 					this.z[index].color = '#3ACE1B'
 				}else if(this.z[index].color == '#F04040'){
@@ -198,7 +217,16 @@
 					this.z[index].color = '#F04040'
 				}
 			},
-			addData(){
+			addData(modify){
+				if(modify){
+					this.addMask = false
+					this.z[this.sIndex].packages = this.packageIndex
+					this.z[this.sIndex].name = this.name
+					this.z[this.sIndex].introduce = this.introduce 
+					this.modify = false;
+					this.sIndex = -1
+					return
+				}
 				this.z.push({
 					top:0,
 					left:0,
@@ -236,6 +264,7 @@
 					})
 					return
 				}
+				this.modify = false
 				this.name  = "" 
 				this.introduce = ""
 				this.packageIndex = 0
@@ -243,12 +272,15 @@
 				
 			},
 			yd(e){
-				this.z[e.currentTarget.id].top = e.changedTouches[0].pageY-100
-				this.z[e.currentTarget.id].left = e.changedTouches[0].pageX-30
+				var winWidth = uni.getSystemInfoSync().windowWidth;
+				var proportion = 750/winWidth
+				console.log()
+				this.z[e.currentTarget.id].top = (e.changedTouches[0].pageY-100)*proportion
+				this.z[e.currentTarget.id].left = (e.changedTouches[0].pageX-30)*proportion
 			},
 			
 			baoc(){
-				
+				 
 				if(this.bImg == ''){
 					uni.showToast({
 						title:'请先添加桌位图',
@@ -266,19 +298,17 @@
 				}
 				
 				const ctx = uni.createCanvasContext('img');
-				ctx.drawImage(this.bImg, 0, 0, 375, 300);
+				
+				ctx.drawImage(this.bImg, 0, 0, this.bwidth, this.bheight);
 				
 				this.z.map((item)=>{
-					ctx.font = "50";
-					// ctx.strokeStyle = "#ccc";
-					//         ctx.textAlign = "center";    
-					 ctx.fillStyle =item.color
+					ctx.font = "50";   
+					ctx.fillStyle =item.color
 					ctx.fillText(item.name,  item.left+10,item.top+22);
 					
 				})
 				
 				ctx.draw(false)
-				
 				
 				
 				var data = {
@@ -301,13 +331,12 @@
 									canvasId: 'img',
 									success: (res)=> {
 										
-										
-										 uni.uploadFile({
-										  url : 'http://47.113.217.251:8080/user/fileUpload',
-										  filePath: res.tempFilePath,
-										  name: 'file',
-										 
-										  success: (uploadFileRes)=> {
+										uni.uploadFile({
+											  url : 'http://47.113.217.251:8080/user/fileUpload',
+											  filePath: res.tempFilePath,
+											  name: 'file',
+											 
+											  success: (uploadFileRes)=> {
 											  console.log(uploadFileRes.data)
 											  
 											  var d = uploadFileRes.data.substring(1,uploadFileRes.data.length-1)
@@ -450,7 +479,7 @@
 	}
 	
 	.tr view{
-		padding: 30rpx 0;
+		padding: 20rpx 0;
 		border: 1rpx solid #ccc;
 	}
 	
@@ -512,5 +541,10 @@
 		width: 25%;
 		padding: 30rpx 0;
 		text-align: center;
+	}
+	
+	.repair{
+		margin: 30rpx;
+		text-align: right;
 	}
 </style>
