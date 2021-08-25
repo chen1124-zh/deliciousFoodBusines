@@ -28,7 +28,7 @@
 			
 		</view>
 		
-		<view class="add_classification" @click="addclassif = true;id = '';menuName=='';menuSort==''">
+		<view class="add_classification" @click="addc">
 			+ 添加菜单分类
 		</view>
 		
@@ -89,6 +89,12 @@
 						this.addclassif = true
 					}
 				})
+			},
+			addc(){
+				this.addclassif = true
+				this.id = ''
+				this.menuName=''
+				this.menuSort=''
 			},
 			dlMenuType(id){
 				

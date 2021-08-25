@@ -386,8 +386,10 @@
 		},
 		onLoad() {
 			var good = uni.getStorageSync('uGood');
+			console.log('good',good)
 			this.goods = good
 			if(good == ''){
+				
 				this.shopId = uni.getStorageSync('shopData').id;
 				this.getMenuTypeListData()
 			}else{
@@ -416,7 +418,7 @@
 					productStatus:good.productStatus,   //商品状态
 					productSet:good.productSet   //商品系列
 				}
-				
+				console.log('this.addData',this.addData)
 				if(good.specification == '' || good.specification == undefined){
 					
 				}else{
@@ -540,6 +542,8 @@
 				    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 				    sourceType: ['album'], //从相册选择
 				    success: (res) => {
+					
+						
 						res.tempFilePaths.map((item)=>{
 							
 							if(this.img.length >= 6){
@@ -550,12 +554,10 @@
 								 url : 'http://47.113.217.251:8080/user/fileUpload',
 								 filePath: item,
 								 name: 'file',
-								
 								success: (uploadFileRes)=> {
-									console.log(uploadFileRes.data)
 									
 									var d = uploadFileRes.data.substring(1,uploadFileRes.data.length-1)
-									console.log(d)
+								
 									  than.img.push({
 										id:than.imgId++,
 										path:d
@@ -614,33 +616,38 @@
 				console.log(menuType)
 				var than = this
 				var data = {
-					 storeId:this.shopId
+					 storeId:this.shopId,
+					 type:0
 				}
 				Api.getMenuTypeList(data).then(res => {
 					
+					
 					than.addData.menuType = res.data.data
 					than.addData.menuTypeIndex = 0
+					
+					if(menuType==undefined){
+						
+					}else{
+						// console.log('this.addData',this.addData.menuType)
+						this.addData.menuType.map((item,index)=>{
+							if(item.id ==  menuType){
+								than.addData.menuTypeIndex = index
+							}
+						})
+					}
 				}).catch(err => {
 					uni.showToast({
 						title: err.msg,
 						icon: 'none'
 					})
 				});
-				if(menuType==undefined){
-					
-				}else{
-					this.addData.menuType.map((item,index)=>{
-						if(item.id ==  menuType){
-							than.addData.menuTypeIndex = index
-						}
-					})
-				}
+				
 				
 				
 			},
 			nextStep(i){
 				if(i == 1){
-					if(this.addData.productName == '' || this.addData.productPrice == '' || this.addData.linedPrice == '' || this.addData.describe == '' || this.addData.productWeight == '' || this.addData.stock == '' || this.addData.producingArea == '' || this.addData.energy == '') {
+					if(this.addData.productName == '' || this.addData.productPrice == '' || this.addData.linedPrice == '' || this.addData.describe == '' || this.addData.productWeight == '') {
 						uni.showToast({
 							title:'请补充完！！！',
 							icon:"none"
@@ -684,7 +691,7 @@
 					productImg:productImgStr,   //商品图片
 					productStatus:1,   //商品状态
 					productSet:this.addData.productSet,   //商品系列
-					
+					discount:0,
 					week1:this.items[0].checked?1:0,
 					week2:this.items[1].checked?1:0,
 					week3:this.items[2].checked?1:0,

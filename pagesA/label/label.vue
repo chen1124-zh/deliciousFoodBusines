@@ -76,7 +76,8 @@
 				labellist:[],
 				shopData:'',
 				type:'',
-				systemLabelList:[]
+				systemLabelList:[],
+				Xselect:[]
 			}
 		},
 		onLoad(op) {
@@ -91,7 +92,9 @@
 			this.type = op.type
 			if(op.type == 1){
 				if(this.shopData.foodLabel){
-					this.labellist = this.shopData.foodLabel.split(',')
+					var temp = JSON.parse(this.shopData.foodLabel)
+					this.Xselect = temp.system
+					this.labellist = temp.custom
 				}
 				
 				uni.setNavigationBarTitle({
@@ -99,7 +102,9 @@
 				})
 			}else if(op.type == 2){
 				if(this.shopData.servuceConfiguration){
-					this.labellist = this.shopData.servuceConfiguration.split(',')
+					var temp = JSON.parse(this.shopData.servuceConfiguration)
+					this.Xselect = temp.system
+					this.labellist = temp.custom
 				}
 				
 				uni.setNavigationBarTitle({
@@ -107,7 +112,9 @@
 				})
 			}else if(op.type == 3){
 				if(this.shopData.foodSort){
-					this.labellist = this.shopData.foodSort.split(',')
+					var temp = JSON.parse(this.shopData.foodSort)
+					this.Xselect = temp.system
+					this.labellist = temp.custom
 				}
 				
 				uni.setNavigationBarTitle({
@@ -115,7 +122,9 @@
 				})
 			}else if(op.type == 4){
 				if(this.shopData.appraiseManager){
-					this.labellist = this.shopData.appraiseManager.split(',')
+					var temp = JSON.parse(this.shopData.appraiseManager)
+					this.Xselect = temp.system
+					this.labellist = temp.custom
 				}
 				
 				uni.setNavigationBarTitle({
@@ -123,7 +132,9 @@
 				})
 			}else if(op.type == 5){
 				if(this.shopData.foodItem){
-					this.labellist = this.shopData.foodItem.split(',')
+					var temp = JSON.parse(this.shopData.foodItem)
+					this.Xselect = temp.system
+					this.labellist = temp.custom
 				}
 				
 				uni.setNavigationBarTitle({
@@ -151,12 +162,14 @@
 				}
 				Api.getMenuTypeList(data).then(res => {
 					this.systemLabelList = res.data.data
-					
-					this.systemLabelList.forEach((item,index)=>{
-						item.select = false
+					this.Xselect.map((item,index)=>{
+						this.systemLabelList.map((items)=>{
+							if(item.id == items.id){
+								items.select = true
+							}
+						})
 					})
-				
-					console.log('res',res.data.data);
+					// console.log('res',res.data.data);
 					
 				}).catch(err => {
 					uni.showToast({
@@ -184,18 +197,16 @@
 					system:systemLabel,
 					custom:this.labellist
 				}
-				// console.log(tempObj)
-				// return
 				if(this.type == 1){
-					this.shopData.foodLabel = tempObj.join()
+					this.shopData.foodLabel = JSON.stringify(tempObj)
 				}else if(this.type == 2){
-					this.shopData.servuceConfiguration = tempObj.join()
+					this.shopData.servuceConfiguration = JSON.stringify(tempObj)
 				}else if(this.type == 3){
-					this.shopData.foodSort = tempObj.join()
+					this.shopData.foodSort = JSON.stringify(tempObj)
 				}else if(this.type == 4){
-					this.shopData.appraiseManager = tempObj.join()
+					this.shopData.appraiseManager = JSON.stringify(tempObj)
 				}else if(this.type == 5){
-					this.shopData.foodItem = tempObj.join()
+					this.shopData.foodItem = JSON.stringify(tempObj)
 				}
 				
 				
@@ -313,6 +324,7 @@
 		width: 100%;
 		height: 100%;
 		background: rgba(0,0,0,0.5);
+		z-index: 101;
 	}
 	.Mask input{
 		font-size: 30rpx;

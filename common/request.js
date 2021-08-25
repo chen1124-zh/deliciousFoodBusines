@@ -7,7 +7,7 @@ const request = (config) => {
 	if(!config.data){
 		config.data = {};
 	}
-	console.log('config',config)
+	// console.log('config',config)
 	// var token = uni.getStorageSync('token')
 	
 	// if(token == ''){

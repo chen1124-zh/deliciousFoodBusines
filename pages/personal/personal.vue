@@ -13,18 +13,21 @@
 					{{shopData.storeName}}
 				</view>
 				<view class="evaluate" style="font-size: 28rpx;">
-					<text>评价4.8</text><text>月售3035</text> <text>配送约30分钟</text>
+					<text>评价0</text><text>月售3035</text> <text>配送约{{shopData.deliveryTime||0}}分钟</text>
 				</view>
 				<view 
 				style="font-size: 26rpx;border-radius: 2rpx;padding: 0 20rpx;border-radius: 20rpx;color: #5EACE7;background: #EEF7FF;display: inline-block;margin: 20rpx 0;">
-					营业时间：9：00-23：00
+					营业时间：{{tiemList || '未设置营业时间'}}
 					<!-- 12312 -->
 				</view>
 				<view class="">
-					<text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right:20rpx;">123</text>
-					<text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text>
-					<text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text>
-					<!-- <text v-for="(item,index) in biao">{{item}}</text> -->
+					<text v-for="(item,index) in biao" :key='index'
+					style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right:20rpx;">
+						{{item}}
+					</text>
+					<!-- <text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text> -->
+					<!-- <text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text>
+					 --><!-- <text v-for="(item,index) in biao">{{item}}</text> -->
 					<!-- {{this.shopData.foodItem = this.labellist.join()}} -->
 				</view>
 			</view>
@@ -115,6 +118,7 @@
 	export default {
 		data() {
 			return { 
+				tiemList:'',
 				user:'',
 				biao:'',
 				chartData:{
@@ -178,8 +182,9 @@
 						icon:'../../static/evaluate.svg'
 					},{
 						name:'店员管理',
-						path:'../../pagesA/clerk/clerk',
-						icon:'../../static/setUp.svg'
+						path:'',
+						// ../../pagesA/clerk/clerk
+						icon:'../../static/clerk.png'
 					},
 					{
 						name:'消息',
@@ -196,7 +201,7 @@
 					},{
 						name:'分店',
 						path:'../../pagesA/branchStore/branchStore',
-						icon:'../../static/setUp.svg'
+						icon:'../../static/shop.png'
 					},{
 						name:'资金账户',
 						path:'',
@@ -240,6 +245,20 @@
 				this.getSelectCountProduct()
 			}
 			
+			if(shop.businessTime){
+				var temp = JSON.parse(shop.businessTime)
+				
+				if(temp.standard){
+					this.tiemList = temp.bz.stime+'-'+temp.bz.etime
+				}else{
+					console.log(temp.timeList)
+					temp.timeList.map((item)=>{
+						console.log(item)
+						this.tiemList+= item.sTime+'-'+item.dTime+' '
+					})
+				}
+			}
+			
 			
 			
 			
@@ -255,9 +274,10 @@
 				var tempShopData = uni.getStorageSync('shopData');
 				if(tempShopData != ''){
 					this.shopData = tempShopData
-					console.log(this.shopData.foodItem)
 					if(this.shopData.foodItem != undefined){
 						this.biao = this.shopData.foodItem.split(',')
+					}else{
+						this.biao = []
 					}
 					
 				}
@@ -278,6 +298,13 @@
 					})
 				}
 				
+				if(this.often[index].path == ''){
+					uni.showToast({
+						title:'功能还在开发敬请期待',
+						icon:'none'
+					})
+					return
+				}
 				
 				uni.navigateTo({
 					url:this.often[index].path
@@ -291,7 +318,6 @@
 					uni.getUserProfile({
 						desc: '登录',
 						success: (res) => {
-							
 							uni.login({
 								success: (ress) => {
 									let code = ress.code
@@ -318,6 +344,7 @@
 											}
 										},
 										success: (resdata) => {
+											
 											this.user = resdata.data.data.data
 											uni.setStorageSync('token',resdata.data.data.data.openId);
 											uni.setStorageSync('user',resdata.data.data.data);
@@ -418,7 +445,7 @@
 		width: 140rpx;
 		height: 140rpx;
 		background: #ccc;
-		border-radius: 30rpx;
+		border-radius: 20rpx;
 		margin-right: 10rpx;
 		overflow: hidden;
 	}

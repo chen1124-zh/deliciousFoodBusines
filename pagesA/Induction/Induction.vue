@@ -34,14 +34,14 @@
 					<input type="text" v-model="name"  placeholder="建议2-4个中文"/>
 				</view>
 			</view>
-			<!-- <view class="item_H">
+			<view class="item_H">
 				<view class="name">
-					商家类型
+					商家类别
 				</view>
-				<view class="">
-					<input type="text" value="" />
-				</view>
-			</view> -->
+				<!-- <picker style="width: 100%;" mode="selector" :range="goodType" range-key="name" @change="change">
+						<view style="width: 100%;display: flex;justify-content: space-between;"><text>{{goodType[goodTypeIndex].name}}</text>  <uni-icons type="arrowright" size="20"></uni-icons> </view>
+				</picker> -->
+			</view>
 			
 		</view>
 		
@@ -72,7 +72,7 @@
 					<text style="color: red;">*</text>小区/村庄
 				</view>
 				<view class="">
-					<input type="text" value="" placeholder="所在小区、村民小組、园区、大厦名称"/>
+					<input type="text" v-model="cui" placeholder="所在小区、村民小組、园区、大厦名称"/>
 				</view>
 			</view>
 			
@@ -81,7 +81,7 @@
 					<text style="color: red;">*</text>详细地址
 				</view>
 				<view class="">
-					<input type="text" value=""  placeholder="楼牌号、路牌号"/>
+					<input type="text" v-model="hao"  placeholder="楼牌号、路牌号"/>
 				</view>
 			</view>
 			<view class="item_H">
@@ -137,6 +137,8 @@
 					guo:false,
 					qi:false
 				},
+				cui:'',
+				hao:'',
 				goodType:[
 					{
 						name:'个人（小微）商家'
@@ -161,7 +163,6 @@
 			this.user = uni.getStorageSync('user')
 			
 			var map = uni.getStorageSync('addMap');
-			console.log(map)
 			if(map == ''){
 				
 			}else{
@@ -184,7 +185,26 @@
 				})
 			},
 			userZgood(){
-				this.user.status = 2
+				
+				if(this.goodTypeIndex == 2 && this.xy.guo == true && this.xy.qi == true || this.allName != ''
+					|| this.name == '' || this.region == '' || this.cui == '' || this.hao == ''){
+					uni.showToast({
+						title:'请补充完整',
+						icon:'none'
+					})
+					return
+				}
+				
+				if(this.goodTypeIndex != 2  && this.xy.qi == true || this.allName != ''
+					|| this.name == '' || this.region == '' || this.cui == '' || this.hao == ''){
+					uni.showToast({
+						title:'请补充完整',
+						icon:'none'
+					})
+					return
+				}
+				
+				this.user.status = 1
 				
 				var data = {
 					id:this.user.id,
@@ -203,12 +223,10 @@
 				}
 				
 				Api.updateUser(data).then(res => {
-					// console.log('res',res);
-					console.log(data)
-					uni.showToast({
-						title:'修改成功',
-						icon:'none'
-					})
+					// uni.showToast({
+					// 	title:'修改成功',
+					// 	icon:'none'
+					// })
 					uni.setStorageSync('user',this.user)
 					uni.navigateBack({
 						delta:-1

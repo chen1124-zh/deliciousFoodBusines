@@ -247,8 +247,9 @@
 				
 			}else{
 				var businessTime = JSON.parse(this.shop.businessTime)
+				this.standard = businessTime.standard
 				this.bz = businessTime.bz
-				this.items = businessTime.items
+				this.timeList = businessTime.timeList
 				
 				// var x = this.shop.businessDate.split(',');
 				// x.map((item,index)=>{
@@ -348,13 +349,14 @@
 			},
 			opData(){
 				var tempData = {
+					standard:this.standard,
 					bz:this.bz,
-					items:this.items
+					timeList:this.timeList
 				}
 				
 				
 				this.shop.businessTime = JSON.stringify(tempData)
-				this.shop.businessDate = this.ydw+','+this.l+','+this.r
+				this.shop.businessDate = JSON.stringify(this.week)
 				
 				var data = this.shop
 				

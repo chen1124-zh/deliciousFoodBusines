@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="good_box">
-			<view class="good_item">
+			<view class="good_item" @click="details">
 				<view class="good_item_top">
 					<view class="">
 						<text class="mode">外卖</text> 12:30送达
@@ -45,7 +45,7 @@
 					
 					<view class="requirement">
 						<!-- 送货上门 -->
-						<view class="phone_img" style="margin: 20rpx auto 20rpx;">
+						<view class="phone_img" style="margin: 20rpx;">
 							<image src="../../static/phone.png" style="width: 100%;height: 100%;text-align: center;" mode=""></image>
 						</view>
 					</view>
@@ -53,6 +53,12 @@
 				<view class="order_miao">
 					<view class="order_img_name">
 						<view class="order_img">
+							<view class="order_item_img">
+								
+							</view>
+							<view class="order_item_img">
+								
+							</view>
 							<view class="order_item_img">
 								
 							</view>
@@ -104,6 +110,11 @@
 			this.getOrderLists()
 		},
 		methods: {
+			details(){
+				uni.navigateTo({
+					url:'../../pagesA/orderdDetails/orderdDetails'
+				})
+			},
 			getOrderLists(){
 				var data = {
 					userId:'',
@@ -170,6 +181,7 @@
 	}
 	
 	.order_img_name{
+		max-width: 500rpx;
 		display: flex;
 		align-items: center;
 	}
@@ -182,11 +194,16 @@
 		width: 112rpx;
 		height: 112rpx;
 		background: #000;
+		margin-right: 10rpx;
+		border-radius: 10rpx;
 	}
 	
 	.order_item_name{
 		color: #999;
 		margin-left: 20rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	
 	.order_item_price{

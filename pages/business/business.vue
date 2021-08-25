@@ -12,16 +12,16 @@
 			</view>
 		</view>
 		<view class="button">
-			<view class="" style="display: flex;margin: 20rpx 0;padding: 0;">
+			<!-- <view class="" style="display: flex;margin: 20rpx 0;padding: 0;"> -->
 				
-				<view class="c" @click="classifi">
+			<!-- 	<view class="c" @click="classifi">
 					餐时设置
-				</view>
+				</view> -->
 				
 				<view class="c" @click="classifi">
 					菜单分类
 				</view>
-			</view>
+			<!-- </view> -->
 			
 			<view class="a" @click="addCommodity">
 				添加新商品
@@ -77,7 +77,7 @@
 						<view class="good_img">
 							<image :src="item.img" style="width: 100%;height: 100%;" mode=""></image>
 						</view>
-						<view class="good_content">
+						<view class="good_content" style="flex: 1;margin: 10rpx 0;">
 							<view class="good_name">
 								{{item.productName}}
 							</view>
@@ -401,7 +401,7 @@
 	.button .c{
 		border: 4rpx solid #10C5A5;
 		color: #10C5A5;
-		margin: 0 4rpx;
+		/* margin: 0 4rpx; */
 	}
 	
 	.button .a{
@@ -474,7 +474,7 @@
 	.good_item{
 		margin: 20rpx 0;
 		display: flex;
-		align-items: center;
+		/* align-items: center; */
 	}
 	
 	.good_img{
@@ -496,8 +496,10 @@
 	}
 	
 	.operation{
+		width: 100%;
 		display: flex;
 		align-items: flex-end;
+		justify-content: space-between;
 	}
 	
 	.weekSelect{
@@ -510,9 +512,13 @@
 		background-color: #10C5A5;
 		color: #fff;
 		font-size: 24rpx;
-		padding: 5rpx 10rpx;
+		padding: 5rpx 20rpx;
 		border-radius: 10rpx;
-		margin: 0 20rpx;
+		margin: 0 10rpx;
+	}
+	
+	.price{
+		color: red;
 	}
 	
 </style>

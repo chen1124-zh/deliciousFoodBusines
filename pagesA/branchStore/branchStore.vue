@@ -30,20 +30,20 @@
 						{{item.storeName}}
 					</view>
 					<view class="">
-						<text>负责人:</text>{{user.nickName}}
+						<text>负责人:</text>{{user.nickName||''}}
 					</view>
 					<view class="">
-						<text>店员人数：</text>{{item.people}}
+						<text>店员人数：</text>{{item.people||0}}
 					</view>
 					<view class="">
 						<text>店铺地址：</text>
 					</view>
 					<view class="operation">
 						<view class="" @click="ustore(index)">
-							编辑
+							<uni-icons type="compose" color="#007AFF"></uni-icons> 编辑
 						</view>
-						<view class="">
-							删除
+						<view class="" @click="dStore(index)">
+							<uni-icons type="trash" color="#007AFF"></uni-icons> 删除
 						</view>
 					</view>
 				</view>
@@ -60,6 +60,7 @@
 
 <script>
 	import Api from '@/common/http.js'
+	import uniIcons from "@/components/uni-icons/uni-icons.vue"
 	export default {
 		data() {
 			return {
@@ -71,7 +72,37 @@
 			this.user = uni.getStorageSync('user');
 			this.getShopList()
 		},
+		computed:{
+			uniIcons
+		},
 		methods: {
+			dStore(index){
+				uni.showModal({
+					title:'删除店铺',
+					content:'确认删除吗',
+					success:(res)=>{
+						if(res.confirm){
+							Api.deleteStore({id:this.shopData[index].id}).then(res => {
+								uni.showToast({
+									title:'删除成功',
+									icon:'none'
+								})
+								this.getShopList()
+							}).catch(err => {
+								uni.showToast({
+									title: err.msg,
+									icon: 'none'
+								})
+							});
+						}else if(res.cancel){
+							uni.showToast({
+								title:'已取消',
+								icon:"none"
+							})
+						}
+					}
+				})
+			},
 			ustore(index){
 				uni.setStorageSync('shopDatas',this.shopData[index])
 				uni.navigateTo({
@@ -200,6 +231,10 @@
 	.operation view{
 		color: #007AFF;
 		margin: 0 20rpx;
+	}
+	
+	.uni-icons{
+		width: 40rpx !important;
 	}
 	
 </style>

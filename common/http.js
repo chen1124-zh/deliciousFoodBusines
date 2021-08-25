@@ -191,6 +191,14 @@ function selectAllTotal (data) {
 	})
 }
 
+// 删除店铺
+function deleteStore (data) {
+	return request({
+		method: "post", // 请求方式
+		url: 'store/deleteStore', // 请求url
+		data: data // 参数
+	})
+}
 
 
 
@@ -217,5 +225,6 @@ export default{
 	selectDayTotal,
 	selectOrderTotal,
 	selectPeopleTotal,
-	selectAllTotal
+	selectAllTotal,
+	deleteStore
 }

@@ -142,7 +142,7 @@
 		</view>
 		
 		<view class="good_box">
-			<view class="good_item">
+			<view class="good_item" @click="details">
 				<view class="good_item_top">
 					<view class="">
 						<text class="mode">外卖</text> 12:30送达
@@ -183,6 +183,12 @@
 				<view class="order_miao">
 					<view class="order_img_name">
 						<view class="order_img">
+							<view class="order_item_img">
+								
+							</view>
+							<view class="order_item_img">
+								
+							</view>
 							<view class="order_item_img">
 								
 							</view>
@@ -346,6 +352,11 @@
 			this.navigation = this.$store.getters.getNavigation
 		},
 		methods: {
+			details(){
+				uni.navigateTo({
+					url:'../../pagesA/orderdDetails/orderdDetails'
+				})
+			},
 			selectDayTotalList(){
 				var data = {
 					storeId:this.shopData.id
@@ -686,6 +697,7 @@
 		/* background: #000; */
 		border-radius: 10rpx;
 		margin-right: 20rpx;
+		overflow: hidden;
 	}
 	
 	.store_name{
@@ -795,6 +807,7 @@
 	}
 	
 	.order_img_name{
+		max-width: 500rpx;
 		display: flex;
 		align-items: center;
 	}
@@ -805,13 +818,18 @@
 	
 	.order_item_img{
 		width: 112rpx;
-		height: 112rpx;
+		height: 112rpx; 
 		background: #000;
+		margin-right: 10rpx;
+		border-radius: 10rpx;
 	}
 	
 	.order_item_name{
 		color: #999;
 		margin-left: 20rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	
 	.order_item_price{
