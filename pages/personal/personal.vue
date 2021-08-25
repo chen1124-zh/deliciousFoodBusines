@@ -173,7 +173,7 @@
 				shopData:'',
 				often:[
 					{
-						name:'店鋪設置',
+						name:'店鋪设置',
 						path:'../../pagesA/shopSetUp/shopSetUp',
 						icon:'../../static/setUp.svg'
 					},{
@@ -188,7 +188,8 @@
 					},
 					{
 						name:'消息',
-						path:'../../pagesA/news/news',
+						path:'',
+						// ../../pagesA/news/news
 						icon:'../../static/news.svg'
 					},{
 						name:'客服',
@@ -244,7 +245,7 @@
 			if(shop!=''){
 				this.getSelectCountProduct()
 			}
-			
+			this.tiemList = ''
 			if(shop.businessTime){
 				var temp = JSON.parse(shop.businessTime)
 				

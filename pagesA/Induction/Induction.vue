@@ -36,11 +36,11 @@
 			</view>
 			<view class="item_H">
 				<view class="name">
-					商家类别
+					<text style="color: red;">*</text>商家类别
 				</view>
-				<!-- <picker style="width: 100%;" mode="selector" :range="goodType" range-key="name" @change="change">
-						<view style="width: 100%;display: flex;justify-content: space-between;"><text>{{goodType[goodTypeIndex].name}}</text>  <uni-icons type="arrowright" size="20"></uni-icons> </view>
-				</picker> -->
+				<picker style="flex: 1;" mode="selector" :range="F" range-key="name" @change="Fchange">
+						<view style="display: flex;justify-content: space-between;"><text>{{F[FIndex].name}}</text>  <uni-icons type="arrowright" size="20"></uni-icons> </view>
+				</picker>
 			</view>
 			
 		</view>
@@ -62,16 +62,14 @@
 					<view class="h" v-else>
 						省市区县、镇/街道、村/社区等
 					</view>
-					
-					
 				</view>
 			</view>
 			
 			<view class="item_H">
 				<view class="name">
-					<text style="color: red;">*</text>小区/村庄
+					<text style="color: red;">*</text>小区/村组
 				</view>
-				<view class="">
+				<view class="fle">
 					<input type="text" v-model="cui" placeholder="所在小区、村民小組、园区、大厦名称"/>
 				</view>
 			</view>
@@ -113,9 +111,17 @@
 			</view>
 		</view>
 		
-		<view class="op" @click="userZgood">
-			提交
+		
+		<view class="op">
+			<view @click="preservation"
+			 style="border-right: 1rpx solid #f0f0f0;">
+				保存
+			</view>
+			<view class="" @click="userZgood">
+				提交
+			</view>
 		</view>
+		
 		
 	</view>
 </template>
@@ -133,6 +139,10 @@
 				detailed:'',
 				Lon:'',
 				lat:'',
+				F:[
+					{name:'就餐场所和餐馆（包括快餐）'}
+				],
+				FIndex:0,
 				xy:{
 					guo:false,
 					qi:false
@@ -141,7 +151,7 @@
 				hao:'',
 				goodType:[
 					{
-						name:'个人（小微）商家'
+						name:'个人（小微）商户'
 					},
 					{
 						name:'个体工商户'
@@ -175,6 +185,20 @@
 			uniIcons
 		},
 		methods: {
+			preservation(){
+				var tD = {
+					goodTypeIndex:this.goodTypeIndex,
+					allName:this.allName,
+					name:this.name,
+					cui:this.cui,
+					hao:this.hao
+				}
+				
+				console.log(tD)
+			},
+			Fchange(e){
+				this.FIndex = e.detail.value
+			},
 			change(e){
 				// console.log(e)
 				this.goodTypeIndex = e.detail.value
@@ -243,6 +267,16 @@
 </script> 
 
 <style>
+	input{
+		width: 100%;
+	}
+	
+	.fle{
+		flex: 1;
+	}
+	view{
+		font-size: 26rpx;
+	}
 	.tal{
 		font-size: 30rpx;
 		margin: 20rpx;
@@ -272,10 +306,18 @@
 		position: fixed;
 		bottom: 0;
 		width: 100%;
-		padding: 20rpx 0;
-		background: #10C5A5;
+		/* padding: 20rpx 0; */
+		
 		text-align: center;
 		color: #fff;
+		display: flex;
+		
+	}
+	
+	.op view{
+		flex: 1;
+		padding: 20rpx 0;
+		background: #10C5A5;
 	}
 	
 </style>

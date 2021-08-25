@@ -94,7 +94,7 @@
 			</view>
 			
 			
-			<view class="line_box">
+			<!-- <view class="line_box">
 				<view class="">
 					商品分量
 				</view>
@@ -102,7 +102,7 @@
 					<input type="number" v-model="addData.productWeight" />
 					<text>克</text>
 				</view>
-			</view>
+			</view> -->
 			<!-- <view class="line_box">
 				<view class="">
 					原料
@@ -647,7 +647,7 @@
 			},
 			nextStep(i){
 				if(i == 1){
-					if(this.addData.productName == '' || this.addData.productPrice == '' || this.addData.linedPrice == '' || this.addData.describe == '' || this.addData.productWeight == '') {
+					if(this.addData.productName == '' || this.addData.productPrice == '' || this.addData.linedPrice == '' || this.addData.describe == '' ) {
 						uni.showToast({
 							title:'请补充完！！！',
 							icon:"none"

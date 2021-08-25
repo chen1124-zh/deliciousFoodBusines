@@ -58,7 +58,7 @@
 			<view class="good_left">
 				<view class="time">
 					<picker mode="selector" :range="cs" range-key="name" @change="cschange">
-						<view>{{cs[csIndex].name}}</view>
+						<view>{{cs[csIndex].name}} <uni-icons type="arrowdown"></uni-icons> </view>
 					</picker>
 				</view>
 				<view class="good_title_select">
@@ -70,7 +70,7 @@
 			</view>
 			<view class="good_right">
 				<view class="good_title">
-					{{classifiList[classifSelect].menuName}}
+					{{classifiList[classifSelect].menuName || ''}}
 				</view>
 				<view class="good_item_box">
 					<view class="good_item" v-for="(item,index) in goodList" :key='index'>
@@ -115,6 +115,7 @@
 </template>
 
 <script>
+	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	import Api from '@/common/http.js'
 	export default {
 		data() {
@@ -165,6 +166,9 @@
 		},
 		onLoad() {
 
+		},
+		computed:{
+			uniIcons
 		},
 		methods: {
 			getUser(){
@@ -313,6 +317,15 @@
 				})
 			},
 			addCommodity(){
+				
+				if(this.classifiList.length == 0){
+					uni.showToast({
+						title:'请先添加菜单分类',
+						icon:'none'
+					})
+					return
+				}
+				
 				uni.removeStorage({
 					key:'uGood'
 				})
@@ -421,6 +434,7 @@
 		padding: 10rpx 0;
 		border-radius: 15rpx 15rpx 0 15rpx;
 		box-shadow: 0rpx 0rpx 5rpx #ccc;
+		font-size: 28rpx;
 	}
 	
 	.good_box{

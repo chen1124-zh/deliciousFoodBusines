@@ -25,7 +25,7 @@
 			</view>
 			<view class="bang">
 				<view class="" style="font-size: 36rpx;">
-					￥{{profit}}
+					￥{{profit.toFixed(2) || 0.00}}
 				</view>
 				<view class="" style="font-size: 20rpx;">
 					累计收益
@@ -34,7 +34,7 @@
 			<view class="achievement">
 				<view class="">
 					<view class="achievement_num">
-						{{today}}
+						￥{{today.toFixed(2)}}
 					</view>
 					<view class="achievement_name">
 						今日收入
@@ -136,9 +136,9 @@
 			<view :class="orderIndex == 3?'select_static_name':'static_name'" @click="orderIndex = 3">
 				待就餐({{orderListNum.waitingEat}})
 			</view>
-			<!-- <view class="static_name">
-				售后
-			</view> -->
+			<view :class="orderIndex == 4?'select_static_name':'static_name'" @click="orderIndex = 4">
+				售后({{orderListNum.after}})
+			</view>
 		</view>
 		
 		<view class="good_box">
@@ -167,7 +167,7 @@
 							</view>
 						</view>
 						<view class="address">
-							广州
+							广州广州广州广州广州广州广州广州广州广州广州广州广州
 						</view>
 					</view>
 					
@@ -175,7 +175,7 @@
 					
 					<view class="requirement">
 						送货上门
-						<view class="phone_img" style="margin: 20rpx auto 20rpx;">
+						<view class="phone_img" style="margin: 20rpx auto 20rpx;" @click.stop="gitPhone">
 							<image src="../../static/phone.png" style="width: 100%;height: 100%;text-align: center;" mode=""></image>
 						</view>
 					</view>
@@ -310,11 +310,15 @@
 				food:0,
 				set:0,
 				table:0,
+				// orderListt:[
+				// 	{}
+				// ],
 				orderListNum:{
 					waitingList:0,
 					toBeDelivered:0,
 					distribution:0,
-					waitingEat:0
+					waitingEat:0,
+					after:0
 				},
 				orderIndex:0,
 			}
@@ -572,9 +576,16 @@
 			},
 			gitPhone(){
 				uni.showActionSheet({
-				    itemList: ['A', 'B', 'C'],
+				    itemList: ['1899999990'],
+					itemColor:'#1890FF',
 				    success: function (res) {
-				        console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+						
+						
+						uni.makePhoneCall({
+						    phoneNumber: '1899999990' //仅为示例
+						});
+						
+				        console.log(res);
 				    },
 				    fail: function (res) {
 				        console.log(res.errMsg);
@@ -746,6 +757,7 @@
 	.static_num{
 		display: flex;
 		margin: 30rpx;
+		/* font-size: 26rpx; */
 	}
 	
 	.static_name{
@@ -754,7 +766,7 @@
 		border: 1rpx solid #f0f0f0;
 		text-align: center;
 		padding: 20rpx;
-		font-size: 30rpx;
+		font-size: 22rpx;
 		border-radius: 20rpx 20rpx 0 20rpx;
 	}
 	
@@ -765,7 +777,7 @@
 		border: 1rpx solid #f0f0f0;
 		text-align: center;
 		padding: 20rpx;
-		font-size: 30rpx;
+		font-size: 22rpx;
 		border-radius: 20rpx 20rpx 0 20rpx;
 	}
 	
@@ -1000,5 +1012,10 @@
 	.phone_img{
 		width: 40rpx;
 		height: 40rpx;
+	}
+	
+	.address{
+		font-size: 26rpx;
+		margin-right: 100rpx;
 	}
 </style>

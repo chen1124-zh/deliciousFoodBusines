@@ -27,10 +27,10 @@
 				
 				
 				<view class="title">
-					参团类表
+					洞庭麻辣香锅（华景分店）
 				</view>
 				<view class="">
-					<view class="user">
+					<view class="user" v-if="false">
 						<view class="user_img">
 							
 						</view>

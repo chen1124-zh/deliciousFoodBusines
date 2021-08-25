@@ -18,7 +18,7 @@
 						<text class="mode">外卖</text> 12:30送达
 					</view>
 					<view class="">
-						待接单
+						已完成
 					</view>
 				</view>
 				<view class="user">
@@ -45,7 +45,7 @@
 					
 					<view class="requirement">
 						<!-- 送货上门 -->
-						<view class="phone_img" style="margin: 20rpx;">
+						<view class="phone_img" style="margin: 20rpx;"  @click.stop="gitPhone">
 							<image src="../../static/phone.png" style="width: 100%;height: 100%;text-align: center;" mode=""></image>
 						</view>
 					</view>
@@ -110,6 +110,25 @@
 			this.getOrderLists()
 		},
 		methods: {
+			gitPhone(){
+				uni.showActionSheet({
+				    itemList: ['1899999990'],
+					itemColor:'#1890FF',
+				    success: function (res) {
+						
+						
+						uni.makePhoneCall({
+						    phoneNumber: '1899999990' //仅为示例
+						});
+						
+				        console.log(res);
+				    },
+				    fail: function (res) {
+				        console.log(res.errMsg);
+				    }
+				});
+			},
+					
 			details(){
 				uni.navigateTo({
 					url:'../../pagesA/orderdDetails/orderdDetails'
