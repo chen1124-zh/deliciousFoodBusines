@@ -27,7 +27,7 @@
 				
 				
 				<view class="title">
-					{{orderDetailData.id == 0?'产团列表':orderDetailData.shopName}}
+					{{orderDetailData.id == 0?'参团列表':orderDetailData.shopName}}
 					
 				</view>
 				<view class="" style="border-top:1rpx solid #f0f0f0 ;" v-for="(item,index) in orderDetailData.goodList" :key='index'>
@@ -46,14 +46,20 @@
 									<image :src="items.goodImg" mode="" style="width: 100%;height: 100%;"></image>
 								</view>
 								<view class="good_name">
-									{{items.goodName}}
+									<view class="">
+										{{items.goodName}}
+									</view>
+									<view style="color: #ccc;font-size: 24rpx;" v-if="items.degree">
+										{{items.degree}}
+									</view>
+									
 								</view>
 							</view>
 							<view style="width: 30%; display: flex;align-items: center;justify-content: space-between;">
 								<view class="good_num">
 									x{{items.num}}
 								</view>
-								<view class="good_p">
+								<view class="good_p" style="font-weight: bold;">
 									￥{{items.money}}
 								</view>
 							</view>
@@ -66,11 +72,11 @@
 						<view class="">
 							包装费
 						</view>
-						<view class="">
+						<view class="" style="font-weight: bold;">
 							￥{{item.packing}}
 						</view>
 					</view>
-					<view class="" style="text-align: right;"  v-if="orderDetailData.id == 0">
+					<view class="" style="text-align: right;font-weight: bold;"  v-if="orderDetailData.id == 0">
 						小计：￥{{item.subtotal}}
 					</view>
 				</view>
@@ -78,11 +84,11 @@
 					<view class="">
 						合计
 					</view>
-					<view class="">
+					<view class="" style="font-weight: bold;">
 						￥{{orderDetailData.allPrice}}
 					</view>
 				</view>
-				<view style="text-align: right;color: red;" v-else>
+				<view style="text-align: right;color: red;font-weight: bold;" v-else>
 					合计：￥<text style="font-size: 34rpx;">{{orderDetailData.allPrice}}</text> 
 				</view>
 			</view>
@@ -101,7 +107,7 @@
 					预定时间
 				</view>
 				<view class="content">
-					111
+					3月23日 周一 [12:45]
 				</view>
 			</view>
 			<view class="left_right">
@@ -109,7 +115,9 @@
 					收货地址 <view style="display: inline-block;color: #9F9F9F;background: #F5F5F5;border-radius: 10rpx;padding: 0 10rpx;">站点</view>
 				</view>
 				<view class="content">
-					广州天河南山南比还
+					<text>广州天河南山南比还\n</text> 
+					<text>张小飞 18100000000</text>
+					
 				</view>
 			</view>
 			<view class="left_right">
@@ -148,7 +156,7 @@
 					下单时间
 				</view>
 				<view class="content">
-					2019-9-9
+					2019-9-21 12:10
 				</view>
 			</view>
 			

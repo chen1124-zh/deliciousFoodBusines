@@ -43,7 +43,7 @@
 						path:'../Distribution/Distribution'
 					},
 					{
-						name:'预定设置',
+						name:'预订设置',
 						Already:false,
 						path:'../reserve/reserve'
 					},{

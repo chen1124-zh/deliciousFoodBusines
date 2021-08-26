@@ -166,7 +166,7 @@
 								{{item.phone}}
 							</view>
 						</view>
-						<view class="address">
+						<view class="address" v-if="item.orderStatic!=3">
 							{{item.userAddress}}
 						</view>
 					</view>

@@ -1,21 +1,21 @@
 <template>
 	<view>
-		<view class="search">
+		<view class="search" @click="jump">
 			<view class="city">
-				<picker mode="selector" :range="city" @change="change">
+				<picker mode="selector" :range="city" @change.stop="change">
 					<view>{{city[cityIndex]}}</view>
 				</picker>
 			</view>
 			<view class="inp">
 				<uni-icons type="search"></uni-icons>
-				<input type="text" v-model="keyword" @input="inp"/>
+				<input type="text" v-model="keyword" placeholder="请输入地址" @input="inp"/>
 			</view>
 		</view>
 		
 		<view class="mapBox">
 			<map :latitude="lat" :longitude="lon" :markers="covers" style="width: 100%;height: 100%;" v-if="lat != '' && lon != ''"></map>
 		</view>
-		<view style="margin: 20rpx;">
+		<view style="margin: 20rpx;" v-if="current">
 			<view class="" style="font-size: 28rpx;color: #999;">
 				当前位置
 			</view>
@@ -28,7 +28,7 @@
 						{{current.position.result.address_component.city}}{{current.position.result.address_component.district}}{{current.position.result.address_component.street}}{{current.position.result.address_component.street_number}}
 					</view>
 				</view>
-				<view class="" style="color: #10C5A5;">
+				<view class="" style="color: #10C5A5;" @click="din">
 					使用该地址
 				</view>
 			</view>
@@ -94,7 +94,7 @@
 						},
 						success:(res)=>{
 							this.current.position = res
-							console.log(this.current.position)
+							console.log(res)
 						},
 						fail:(e)=>{
 							console.log(e)
@@ -118,6 +118,17 @@
 			
 		},
 		methods: {
+			din(){
+				uni.setStorageSync('tempLanLon',this.current.position.result)
+				uni.navigateBack({
+					delta:-1
+				})
+			},
+			jump(){
+				uni.navigateTo({
+					url:'../searchRess/searchRess'
+				})
+			},
 			// analysis(obj,lat,lon){
 			// 	this.qqmapsdk.reverseGeocoder({
 			// 		location:{

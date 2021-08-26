@@ -1,0 +1,111 @@
+@import './font/font.css';
+
+@mixin flex($jc: center, $ai: center, $fd: row, $fw: nowrap) {
+	display: flex;
+	justify-content: $jc;
+	align-items: $ai;
+	flex-direction: $fd;
+	flex-wrap: $fw;
+}
+	.actvieColor {
+		    color: #669900;
+	}
+	.addrses4 {
+		line-height: 90upx;
+		text-align: center;
+		color: #000;
+		font-weight: bold;
+		font-size: 26upx;
+		border-bottom: 2upx solid #f8f8f8;
+		display: flex;
+	}
+
+	.addrses4-1 {
+		flex: 1;
+		border-right: 2upx solid #f8f8f8;
+	}
+
+	.addrses4-2 {
+		flex: 1;
+	}
+.bodersss{
+	
+	height:80upx ;
+	position: absolute;
+	width: 100%;
+	margin-top: 20upx;
+}
+.picker-head {
+	width:90%;
+   margin: 0 5%;
+   background-color: #669900;
+   text-align: center;
+   line-height: 80upx;
+   border-radius: 16upx;
+   font-size: 30upx;
+   color: #FFFFFF;
+   margin-top: 10upx;
+}
+.select-al-box {
+	@include flex(flex-start, center, row, nowrap);
+	width: 100%;
+	margin-top: 20upx;
+	font-size: 28rpx;
+	border-bottom: 1upx solid #CCCCCC;
+	padding: 0 10rpx;
+	.select-al-item {
+		margin: 10rpx 0upx;
+		text-align: center;
+		white-space: nowrap;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+		font-weight: bold;
+		transition: color 0.3s ease;
+		&.active {
+			color: #669900;
+		}
+	}
+}
+
+.itmes{
+		border-bottom:6upx solid #FFFFFF;
+		display: block;
+		width: 60upx;
+		margin: 0 auto;
+		margin-top: 20upx;
+		box-sizing: border-box;
+}
+.actives{
+	border-color:#669900 ;
+	
+}
+.swiper-box {
+	width: 100%;
+	flex: 1;
+	// height:calc(100vh - 320upx) ;
+	swiper-item {
+		height: 100%;
+	}
+	.adress-item {
+		height: 100%;
+		.item {
+			padding: 30rpx;
+			transition: all 0.3s ease;
+			&.active {
+				color: #669900;
+				background-color: #f2f2f2;
+			}
+			&.active {
+				text::before{
+					display: inline-block;
+				}
+			}
+			text{
+				font-size: 26rpx;
+			}
+			text::before{
+				display: none;
+			}
+		}
+	}
+}

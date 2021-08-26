@@ -25,7 +25,7 @@
 		<view class="">
 			<view class="item_H">
 				<view class="name">
-					<text style="color: red;">*</text>商家类型
+					<text style="color: red;">*</text>商户类型
 				</view>
 				<view class="" style="flex: 1;"> 
 					 <picker style="width: 100%;" mode="selector" :range="goodType" range-key="name" @change="change">
@@ -37,7 +37,7 @@
 			
 			<view class="item_H">
 				<view class="name">
-					<text style="color: red;">*</text>商家全称
+					<text style="color: red;">*</text>商户全称
 				</view>
 				<view class="">
 					<input type="text" v-model="allName" placeholder="建议2-8个中文"/>
@@ -46,7 +46,7 @@
 			
 			<view class="item_H">
 				<view class="name">
-					<text style="color: red;">*</text>商家简称
+					<text style="color: red;">*</text>商户简称
 				</view>
 				<view class="">
 					<input type="text" v-model="name"  placeholder="建议2-4个中文"/>
@@ -54,7 +54,7 @@
 			</view>
 			<view class="item_H">
 				<view class="name">
-					<text style="color: red;">*</text>商家类别
+					<text style="color: red;">*</text>商户类别
 				</view>
 				<picker style="flex: 1;" mode="selector" :range="F" range-key="name" @change="Fchange">
 						<view style="display: flex;justify-content: space-between;"><text>{{F[FIndex].name}}</text>  <uni-icons type="arrowright" size="20"></uni-icons> </view>
@@ -104,12 +104,12 @@
 				<view class="name">
 					<text style="color: red;">*</text>经纬度
 				</view>
-				<view class="inp">
+				<view class="inp" @click="jump">
 					<view class="" v-if="lat && Lon">
 						{{lat}} , {{Lon}}
 					</view>
 					<view class="h" v-else>
-						请获取商家经营地的经纬度
+						请获取商户经营地的经纬度
 					</view>
 				</view>
 			</view>
@@ -125,7 +125,7 @@
 			<view class="xy">
 				<uni-icons @click='xy.guo = true' type="circle" size="20" v-if="!xy.guo"></uni-icons>
 				<uni-icons @click='xy.guo = false' type="checkbox-filled" v-else color='#66CD00'  size="20"></uni-icons>
-				同意《国社商家服务条例》
+				同意《国社商户服务条例》
 			</view>
 		</view>
 		
@@ -190,19 +190,33 @@
 		onShow() {
 			this.user = uni.getStorageSync('user')
 			
-			var map = uni.getStorageSync('addMap');
-			if(map == ''){
+			var latLng = uni.getStorageSync('latlon');
+			if(latLng == ''){
 				
 			}else{
-				this.region = map
-				this.lat = this.region.location.lat
-				this.Lon = this.region.location.lng
+				this.lat = latLng.lat
+				this.Lon = latLng.lon
 			}
+			// var map = uni.getStorageSync('addMap');
+			// if(map == ''){
+				
+			// }else{
+			// 	this.region = map
+			// 	this.lat = this.region.location.lat
+			// 	this.Lon = this.region.location.lng
+			// }
 		},
 		components:{
 			uniIcons
 		},
 		methods: {
+			jump(){
+				uni.removeStorageSync('latlon')
+				uni.removeStorageSync('tempLanLon')
+				uni.navigateTo({
+					url:'../LonLat/LonLat'
+				})
+			},
 			preservation(){
 				var tD = {
 					goodTypeIndex:this.goodTypeIndex,

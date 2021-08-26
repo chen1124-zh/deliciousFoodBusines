@@ -218,9 +218,27 @@
                     "path" : "address/address",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "地位地址",
+                    "navigationBarTitleText": "定位地址",
                     "enablePullDownRefresh": false
                 }
+                
+                }
+                ,{
+                    "path" : "searchRess/searchRess",
+                    "style" :                                                                                    
+					{
+						"navigationBarTitleText": "搜索地址",
+						"enablePullDownRefresh": false
+					}
+                
+                },
+				{
+                    "path" : "hometown/hometown",
+                    "style" :                                                                                    
+					{
+						"navigationBarTitleText": "选择地址",
+						"enablePullDownRefresh": false
+					}
                 
                 }
             ]

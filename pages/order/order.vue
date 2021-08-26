@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="good_box">
-			<view class="good_item" v-for="(item,index) in orderList" @click="details">
+			<view class="good_item" v-for="(item,index) in orderList" @click="details(index)">
 				<view class="good_item_top">
 					<view class="">
 						<text class="mode">{{item.eatType==0?'外卖':'到店'}}</text> {{item.tiem}}送达
@@ -174,9 +174,9 @@
 				});
 			},
 					
-			details(){
+			details(index){
 				uni.navigateTo({
-					url:'../../pagesA/orderdDetails/orderdDetails'
+					url:'../../pagesA/orderdDetails/orderdDetails?id='+this.orderList[index].id
 				})
 			},
 			getOrderLists(){
