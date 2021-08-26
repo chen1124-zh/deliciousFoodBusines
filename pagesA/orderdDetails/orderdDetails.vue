@@ -4,7 +4,7 @@
 			<view class="tips_name" @click="mask = true">
 				订单状态>
 			</view>
-			<view class="">
+			<view class="" @click.stop="gitPhone">
 				<view class="customer_logo" >
 					<image src="../../static/service.png" style="width: 100%;height: 100%;" mode=""></image>
 				</view>
@@ -27,33 +27,34 @@
 				
 				
 				<view class="title">
-					洞庭麻辣香锅（华景分店）
+					{{orderDetailData.id == 0?'产团列表':orderDetailData.shopName}}
+					
 				</view>
-				<view class="">
-					<view class="user" v-if="false">
+				<view class="" style="border-top:1rpx solid #f0f0f0 ;" v-for="(item,index) in orderDetailData.goodList" :key='index'>
+					<view class="user" v-if="orderDetailData.id == 0">
 						<view class="user_img">
-							
+							<image :src="item.userImg" mode="" style="width: 100%;height: 100%;"></image>
 						</view>
 						<view class="user_name">
-							电击小子
+							{{item.userName}}
 						</view>
 					</view>
-					<view class="good">
+					<view class="good" v-for="(items,indexs) in item.list" :key='index'>
 						<view class="good_item">
 							<view style="flex: 1;display: flex;align-items: center;">
 								<view class="good_img">
-									
+									<image :src="items.goodImg" mode="" style="width: 100%;height: 100%;"></image>
 								</view>
 								<view class="good_name">
-									三文鱼
+									{{items.goodName}}
 								</view>
 							</view>
 							<view style="width: 30%; display: flex;align-items: center;justify-content: space-between;">
 								<view class="good_num">
-									x2
+									x{{items.num}}
 								</view>
 								<view class="good_p">
-									￥4.5
+									￥{{items.money}}
 								</view>
 							</view>
 							
@@ -61,29 +62,29 @@
 						</view>
 					</view>
 					
-					<view class="package">
+					<view class="package" v-if="item.packing">
 						<view class="">
 							包装费
 						</view>
 						<view class="">
-							￥4.5
+							￥{{item.packing}}
 						</view>
 					</view>
-					<view class="" style="text-align: right;">
-						小计：￥41:5
+					<view class="" style="text-align: right;"  v-if="orderDetailData.id == 0">
+						小计：￥{{item.subtotal}}
 					</view>
 				</view>
-				<view class="package">
+				<view class="package" v-if="orderDetailData.id == 0">
 					<view class="">
 						合计
 					</view>
 					<view class="">
-						￥4.5
+						￥{{orderDetailData.allPrice}}
 					</view>
 				</view>
-				<!-- <view class="" style="text-align: right;">
-					小计：41:5
-				</view> -->
+				<view style="text-align: right;color: red;" v-else>
+					合计：￥<text style="font-size: 34rpx;">{{orderDetailData.allPrice}}</text> 
+				</view>
 			</view>
 				
 					
@@ -108,7 +109,7 @@
 					收货地址 <view style="display: inline-block;color: #9F9F9F;background: #F5F5F5;border-radius: 10rpx;padding: 0 10rpx;">站点</view>
 				</view>
 				<view class="content">
-					整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整整
+					广州天河南山南比还
 				</view>
 			</view>
 			<view class="left_right">
@@ -181,32 +182,97 @@
 				dataArray:[
 					{
 						time:'2020-11-25 17:32:15',
-						title:'标题',
+						title:'提交订单',
 					},{
 						time:'2020-11-25 17:32:15',
-						title:'标题',
+						title:'订单支付',
 					},{
 						time:'2020-11-25 17:32:15',
-						title:'标题',
+						title:'商家接单',
 					},{
 						time:'2020-11-25 17:32:15',
-						title:'标题',
+						title:'订单配送',
 					},{
 						time:'2020-11-25 17:32:15',
-						title:'标题',
-					},{
-						time:'2020-11-25 17:32:15',
-						title:'标题',
-					},
-				]
+						title:'订单送达',
+					}
+				],
+				orderDetailData:{
+					id:0,
+					shopName:'洞庭麻辣香锅（华景分店）',
+					allPrice:4.5,
+					goodList:[
+						{
+							userImg:'../../static/user2.png',
+							userName:'电击小子',
+							list:[
+								{
+									goodImg:'../../static/tempGood2.png',
+									goodName:'三文鱼',
+									num:2,
+									money:4.5,
+									degree:'3分熟'
+								}
+							],
+							packing:4.5,
+							subtotal:41.5
+						},
+						{
+							userImg:'../../static/user2.png',
+							userName:'电击小子',
+							list:[
+								{
+									goodImg:'../../static/tempGood2.png',
+									goodName:'三文鱼',
+									num:2,
+									money:4.5,
+									degree:'3分熟'
+								},
+								{
+									goodImg:'../../static/tempGood2.png',
+									goodName:'三文鱼',
+									num:2,
+									money:4.5,
+									degree:'3分熟'
+								}
+							],
+							packing:0,
+							subtotal:41.5
+						}
+					]
+				}
 			}
 		},
 		components:{
 			uniIcons,
 			timeAxis
 		},
+		onLoad(op) {
+			console.log(op.id)
+			this.orderDetailData.id = op.id
+			if(this.orderDetailData.id == 1){
+				this.orderDetailData.goodList.length = 1
+			}
+		},
 		methods: {
-			
+			gitPhone(){
+				uni.showActionSheet({
+				    itemList: ['1899999990'],
+					itemColor:'#1890FF',
+				    success: function (res) {
+						
+						
+						uni.makePhoneCall({
+						    phoneNumber: '1899999990' //仅为示例
+						});
+						
+				        console.log(res);
+				    },
+				    fail: function (res) {
+				        console.log(res.errMsg);
+				    }
+				});
+			},
 		}
 	}
 </script>
@@ -260,7 +326,7 @@
 		height: 80rpx;
 		background: #0D92FF;
 		margin-right: 20rpx;
-		
+		overflow: hidden;
 	}
 	
 	.package{
@@ -301,6 +367,7 @@
 		background: #000000;
 		border-radius: 50%;
 		margin-right: 10rpx;
+		overflow: hidden;
 	}
 	
 	

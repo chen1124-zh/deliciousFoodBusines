@@ -66,7 +66,7 @@
 			<view class="store_box">
 				<view class="img_name">
 					<view class="img">
-						<image :src="shopData.storeLogo" style="width: 100%;height: 100%;" mode=""></image>
+						<image :src="shopData.storeLogo||'../../static/tmepshop1.png'" style="width: 100%;height: 100%;" mode=""></image>
 					</view>
 					<view class="">
 						<view class="store_name">
@@ -142,39 +142,39 @@
 		</view>
 		
 		<view class="good_box">
-			<view class="good_item" @click="details">
+			<view class="good_item" v-for="(item,index) in orderList" :key='index' v-if="item.static!=10 && orderIndex==item.static && item.static != 4" @click="details(index)">
 				<view class="good_item_top">
 					<view class="">
-						<text class="mode">外卖</text> 12:30送达
+						<text class="mode">{{item.eatType==0?'外卖':'到店'}}</text> {{item.tiem}}送达
 					</view>
 					<view class="">
-						待接单
+						{{orderstaticStr[item.static]}}
 					</view>
 				</view>
 				<view class="user">
 					
 					<view class="user_logo">
-						
+						<image :src="item.userImg" mode="" style="width: 100%;height: 100%;"></image>
 					</view>
 					<view class="user_N">
 						<view class="user_information">
 							
 							<view class="user_Name">
-								张
+								{{item.userName}}
 							</view>
 							<view class="user_phone">
-								123123123
+								{{item.phone}}
 							</view>
 						</view>
 						<view class="address">
-							广州广州广州广州广州广州广州广州广州广州广州广州广州
+							{{item.userAddress}}
 						</view>
 					</view>
 					
 					
 					
 					<view class="requirement">
-						送货上门
+						{{orderStaticStr[item.orderStatic] }}
 						<view class="phone_img" style="margin: 20rpx auto 20rpx;" @click.stop="gitPhone">
 							<image src="../../static/phone.png" style="width: 100%;height: 100%;text-align: center;" mode=""></image>
 						</view>
@@ -182,37 +182,34 @@
 				</view>
 				<view class="order_miao">
 					<view class="order_img_name">
-						<view class="order_img">
-							<view class="order_item_img">
-								
+						<view class="order_img" >
+							<view class="order_item_img" v-for="(items,indexs) in item.goodimgList" :key='indexs'>
+								<image :src="items" mode="" style="width: 100%;height: 100%;"></image>
 							</view>
-							<view class="order_item_img">
-								
-							</view>
-							<view class="order_item_img">
-								
-							</view>
+						
 						</view>
 						<view class="order_item_name">
-							鱼蛋分、肥牛
+							{{item.goodNameList}}
 						</view>
 					</view>
 					<view class="order_price_num">
 						<view class="order_item_price">
-							￥25.5
+							￥{{item.allPrice}}
 						</view>
 						<view class="order_item_num">
-							共4件
+							共{{item.quantity}}件
 						</view>
 					</view>
 				</view>
 				
 				<view class="agree">
-					<view class="" style="width: 30%;color: #999;">
-						拒绝
+					<view @click.stop="refuse(index)" v-if='item.static != 3'
+					 style="width: 30%;color: #999;">
+						{{buttomStr[item.static].left}}
 					</view>
-					<view class="" style="flex: 1;background: #10C5A5;color: #fff;">
-						接单
+					<view @click.stop="meet(index)"
+					 style="flex: 1;background: #10C5A5;color: #fff;">
+						{{buttomStr[item.static].right}}
 					</view>
 				</view>
 				
@@ -284,7 +281,6 @@
 		</view>
 		
 		
-		
 	
 	</view>
 </template>
@@ -292,6 +288,7 @@
 <script>
 	import Api from '@/common/http.js'
 	export default {
+		
 		data() {
 			return {
 				shopShow:false,
@@ -310,9 +307,102 @@
 				food:0,
 				set:0,
 				table:0,
-				// orderListt:[
-				// 	{}
-				// ],
+				orderstaticStr:{
+					0:'待接单',
+					1:'待配送',
+					2:'配送中',
+					3:'就餐中',
+				},
+				buttomStr:{
+					0:{
+						left:'拒单',
+						right:'接单'
+					},
+					1:{
+						left:'取消订单',
+						right:'配送'
+					},
+					2:{
+						left:'打印配送单',
+						right:'订单已送达'
+					},
+					3:{
+						left:'',
+						right:'扫吗就餐'
+					},
+				},
+				orderList:[
+					{
+						id:0,
+						eatType:0,
+						tiem:'12:30',
+						static:0,
+						orderStatic:0,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					},
+					{
+						id:0,
+						eatType:1,
+						tiem:'12:30',
+						static:0,
+						orderStatic:1,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					},
+					{
+						id:1,
+						eatType:2,
+						tiem:'12:30',
+						static:0,
+						orderStatic:2,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					},
+					{
+						id:1,
+						eatType:3,
+						tiem:'12:30',
+						static:0,
+						orderStatic:3,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					}
+				],
+				orderStaticStr:{
+					0:'送货上门',
+					1:'国社餐厅',
+					2:'点房：12人 01包厢',
+					3:'到店取餐'
+				},
 				orderListNum:{
 					waitingList:0,
 					toBeDelivered:0,
@@ -356,9 +446,16 @@
 			this.navigation = this.$store.getters.getNavigation
 		},
 		methods: {
-			details(){
+			meet(index){
+				
+				this.orderList[index].static++
+			},
+			refuse(index){
+				this.orderList[index].static = 10
+			},
+			details(index){
 				uni.navigateTo({
-					url:'../../pagesA/orderdDetails/orderdDetails'
+					url:'../../pagesA/orderdDetails/orderdDetails?id='+this.orderList[index].id
 				})
 			},
 			selectDayTotalList(){
@@ -807,6 +904,7 @@
 		background: #000000;
 		margin-right: 10rpx;
 		border-radius: 50%;
+		overflow: hidden;
 	}
 	
 	.user_N{
@@ -834,6 +932,7 @@
 		background: #000;
 		margin-right: 10rpx;
 		border-radius: 10rpx;
+		overflow: hidden;
 	}
 	
 	.order_item_name{

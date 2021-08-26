@@ -198,7 +198,7 @@
 					custom:this.labellist
 				}
 				if(this.type == 1){
-					this.shopData.foodLabel = JSON.stringify(tempObj)
+					this.shopData.foodLabel = JSON.stringify(tempObj)	
 				}else if(this.type == 2){
 					this.shopData.servuceConfiguration = JSON.stringify(tempObj)
 				}else if(this.type == 3){

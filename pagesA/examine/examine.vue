@@ -14,14 +14,52 @@
 </template>
 
 <script>
+	import Api from '@/common/http.js'
 	export default {
 		data() {
 			return {
-				
+				user:''
 			}
 		},
 		methods: {
 			userClick(){
+				this.user = uni.getStorageSync('user')
+				this.user.status = 2
+				
+				var data = {
+					id:this.user.id,
+					nickName:this.user.nickName,   //昵称
+					mobile:this.user.mobile,   //手机号
+					isVip:this.user.isVip,    //是否为会员
+					images:this.user.images,    //头像
+					userName:'',   //账号
+					password:'',   //密码
+					accountType:2,   //账号类型	
+					addTotal:0,  //累计消费
+					orderNum:0,  //累计下单量
+					accountMoney:0, //账户余额
+					isvipLevel:0,   //会员等级
+					status:2
+				}
+				
+				Api.updateUser(data).then(res => {
+					// uni.showToast({
+					// 	title:'修改成功',
+					// 	icon:'none'
+					// })
+					uni.setStorageSync('user',this.user)
+					uni.navigateBack({
+						delta:-1
+					})
+				}).catch(err => {
+					uni.showToast({
+						title: err.msg,
+						icon: 'none'
+					})
+				});
+				
+				
+				return
 					uni.getUserProfile({
 						desc: '登录',
 						success: (res) => {

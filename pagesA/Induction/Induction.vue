@@ -1,5 +1,23 @@
 <template>
 	<view>
+		<swiper class="swiper" :indicator-dots="true"
+				:autoplay="true"
+				:circular = 'true'
+				:interval="2000"
+				:duration="500"
+				indicator-color='#fff'
+				indicator-active-color='#0D92FF'>
+			<swiper-item>
+				<!-- <view style="width: auto;height: 240rpx;"> -->
+					<image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimgs.bzw315.com%2Fuploadfiles%2Fnew%2Fimage%2F20130201%2F20130201162439_7131.jpg&refer=http%3A%2F%2Fimgs.bzw315.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1632559483&t=18abff196664c68d3cba4a7f7ee835be" style="width: 100%;height: 100%;" mode=""></image>
+				<!-- </view> -->
+			</swiper-item>
+			<swiper-item>
+				<!-- <view style="width: auto;height: 240rpx;"> -->
+					<image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwx2.sinaimg.cn%2Flarge%2F006HHNUjly4gtt34n1dyaj30u00k0did.jpg&refer=http%3A%2F%2Fwx2.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1632559484&t=5ab482bf2e8298c685b8303b33d6ca69" style="width: 100%;height: 100%;" mode=""></image>
+				<!-- </view> -->
+			</swiper-item>
+		</swiper>
 		<view class="tal">
 			基本信息
 		</view>
@@ -210,25 +228,25 @@
 			},
 			userZgood(){
 				
-				if(this.goodTypeIndex == 2 && this.xy.guo == true && this.xy.qi == true || this.allName != ''
-					|| this.name == '' || this.region == '' || this.cui == '' || this.hao == ''){
-					uni.showToast({
-						title:'请补充完整',
-						icon:'none'
-					})
-					return
-				}
+				// if(this.goodTypeIndex == 2 && this.xy.guo == true && this.xy.qi == true || this.allName != ''
+				// 	|| this.name == '' || this.region == '' || this.cui == '' || this.hao == ''){
+				// 	uni.showToast({
+				// 		title:'请补充完整',
+				// 		icon:'none'
+				// 	})
+				// 	return
+				// }
 				
-				if(this.goodTypeIndex != 2  && this.xy.qi == true || this.allName != ''
-					|| this.name == '' || this.region == '' || this.cui == '' || this.hao == ''){
-					uni.showToast({
-						title:'请补充完整',
-						icon:'none'
-					})
-					return
-				}
+				// if(this.goodTypeIndex != 2  && this.xy.qi == true || this.allName != ''
+				// 	|| this.name == '' || this.region == '' || this.cui == '' || this.hao == ''){
+				// 	uni.showToast({
+				// 		title:'请补充完整',
+				// 		icon:'none'
+				// 	})
+				// 	return
+				// }
 				
-				this.user.status = 1
+				this.user.status = 2
 				
 				var data = {
 					id:this.user.id,
@@ -243,7 +261,7 @@
 					orderNum:0,  //累计下单量
 					accountMoney:0, //账户余额
 					isvipLevel:0,   //会员等级
-					status:1
+					status:2
 				}
 				
 				Api.updateUser(data).then(res => {

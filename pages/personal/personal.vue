@@ -2,7 +2,7 @@
 	<view>
 		<view class="user_information" @click="getUser()">
 			<view class="user_img">
-				<image :src="shopData.storeLogo" style="width: 100%;height: 100%;" mode=""></image>
+				<image :src="shopData.storeLogo||'../../static/tmepshop1.png'" style="width: 100%;height: 100%;" mode=""></image>
 			</view>
 			<view v-if="user == ''"
 			style="line-height: 130rpx;">
@@ -20,7 +20,7 @@
 					营业时间：{{tiemList || '未设置营业时间'}}
 					<!-- 12312 -->
 				</view>
-				<view class="">
+				<view class="" v-if="biao.length>0">
 					<text v-for="(item,index) in biao" :key='index'
 					style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right:20rpx;">
 						{{item}}
@@ -29,6 +29,9 @@
 					<!-- <text style="display: inline-block;border-radius: 10rpx;background: #4B2F65;color: #999;padding: 5rpx 30rpx;margin-right: 20rpx;">123</text>
 					 --><!-- <text v-for="(item,index) in biao">{{item}}</text> -->
 					<!-- {{this.shopData.foodItem = this.labellist.join()}} -->
+				</view>
+				<view v-else>
+					未设置菜品标签
 				</view>
 			</view>
 		</view>

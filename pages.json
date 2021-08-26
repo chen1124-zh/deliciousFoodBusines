@@ -205,6 +205,24 @@
                 }
                 
                 }
+                ,{
+                    "path" : "LonLat/LonLat",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "设置经纬度",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "address/address",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "地位地址",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 	}],
 	"tabBar":{

@@ -232,15 +232,7 @@
 				
 			}else{
 				var x = this.shop.businessDate.split(',');
-				x.map((item,index)=>{
-					if(index == 0){
-						this.ydw = item
-					}else if(index == 1){
-						this.l = item
-					}else if(index == 2){
-						this.r = item
-					}
-				})
+				
 			}
 			
 			if(this.shop.businessTime== '' || this.shop.businessTime== undefined ||this.shop.businessTime== 'undefined'){

@@ -12,32 +12,33 @@
 			</view>
 		</view>
 		<view class="good_box">
-			<view class="good_item" @click="details">
+			<view class="good_item" v-for="(item,index) in orderList" @click="details">
 				<view class="good_item_top">
 					<view class="">
-						<text class="mode">外卖</text> 12:30送达
+						<text class="mode">{{item.eatType==0?'外卖':'到店'}}</text> {{item.tiem}}送达
 					</view>
 					<view class="">
-						已完成
+						{{item.static==0?'已完成':'已取消'}}
+						<!-- {{}} -->
 					</view>
 				</view>
 				<view class="user">
 					
 					<view class="user_logo">
-						
+						<image :src="item.userImg" mode="" style="width: 100%;height: 100%;"></image>
 					</view>
 					<view class="user_N">
 						<view class="user_information">
 							
 							<view class="user_Name">
-								张
+								{{item.userName}}
 							</view>
 							<view class="user_phone">
-								123123123
+								{{item.phone}}
 							</view>
 						</view>
 						<view class="address">
-							广州
+							{{item.userAddress}}
 						</view>
 					</view>
 					
@@ -53,26 +54,20 @@
 				<view class="order_miao">
 					<view class="order_img_name">
 						<view class="order_img">
-							<view class="order_item_img">
-								
-							</view>
-							<view class="order_item_img">
-								
-							</view>
-							<view class="order_item_img">
-								
+							<view class="order_item_img" v-for="(items,indexs) in item.goodimgList" :key='indexs'>
+								<image :src="items" mode="" style="width: 100%;height: 100%;"></image>
 							</view>
 						</view>
 						<view class="order_item_name">
-							鱼蛋分、肥牛
+							{{item.goodNameList}}
 						</view>
 					</view>
 					<view class="order_price_num">
 						<view class="order_item_price">
-							￥25.5
+							￥{{item.allPrice}}
 						</view>
 						<view class="order_item_num">
-							共4件
+							共{{item.quantity}}件
 						</view>
 					</view>
 				</view>
@@ -99,7 +94,57 @@
 			return {
 				active: 0,
 				user:'',
-				navigation:''
+				navigation:'',
+				orderList:[
+					{
+						id:0,
+						eatType:0,
+						tiem:'12:30',
+						static:0,
+						orderStatic:0,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					},
+					{
+						id:1,
+						eatType:0,
+						tiem:'12:30',
+						static:1,
+						orderStatic:0,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					},
+					{
+						id:0,
+						eatType:0,
+						tiem:'12:30',
+						static:1,
+						orderStatic:0,
+						userImg:'../../static/user2.png',
+						userName:'小旋风',
+						phone:'1888888888',
+						userAddress:'广州天河南山南比还',
+						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
+						goodNameList:'鱼蛋分、肥牛',
+						allPrice:'25.5',
+						quantity:4,
+						
+					},
+				]
 			}
 		},
 		created() {
@@ -188,6 +233,7 @@
 		background: #000000;
 		margin-right: 10rpx;
 		border-radius: 50%;
+		overflow: hidden;
 	}
 	
 	.user_N{
