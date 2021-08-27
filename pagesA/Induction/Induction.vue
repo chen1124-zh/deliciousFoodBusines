@@ -336,7 +336,7 @@
 	
 	.op{
 		position: fixed;
-		bottom: 0;
+		bottom: 24rpx;
 		width: 100%;
 		/* padding: 20rpx 0; */
 		

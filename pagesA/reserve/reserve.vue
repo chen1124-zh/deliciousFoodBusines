@@ -427,7 +427,7 @@
 		<view  style="margin-bottom:150rpx;" v-else>
 			<view class="" style="position: relative;">
 				<view class="a" v-for="(item,index) in SeatList" :key='index' 
-				:style="{'top':item.top+'px','left':item.left+'px','color':item.color}"
+				:style="{'top':item.top+'rpx','left':item.left+'rpx','color':item.color}"
 				 v-if="item.seatType==itemType">
 					{{item.seatName}}
 				</view>
@@ -454,6 +454,8 @@
 					</view>
 					<view class="" style="display: flex;color: #999;">
 						<text style="color: #000;">当天预约</text>
+						
+						<text style="margin-left:10px;">提前</text>
 						<view class="pickerTime"  >
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindDTimeChange">
 								<view class="uni-input">{{DTime.today.time}}</view>
@@ -477,7 +479,7 @@
 					<view class="" style="margin: 0 20rpx;">
 						<view class="" style="display: flex;color: #999;">
 							<view class="">
-								往后
+								提前 
 							</view>
 							<view class="pickerTime">
 								<input type="number" v-model="DTime.beApart.sDay" style="width: 40rpx;"/>
@@ -496,14 +498,14 @@
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
-							<text>今天</text>
+							<text>最晚</text>
 							<view class="pickerTime">
 								<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindDTimesChange">
 									<view class="uni-input">{{DTime.beApart.time}}</view>
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>前预定</text>
+							<text>预定</text>
 							
 						</view>
 					</view>

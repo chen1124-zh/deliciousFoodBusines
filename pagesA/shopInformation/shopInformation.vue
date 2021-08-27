@@ -14,7 +14,7 @@
 		</view>
 		<view class="box">
 			<view class="title">
-				店铺照片
+				店铺门头照
 			</view>
 			<view class="s_pass" v-if="!storePhoto" @click="addImg(2)">
 				<image src="../../static/x.svg" mode=""></image>
@@ -25,7 +25,7 @@
 		</view>
 		<view class="box">
 			<view class="title">
-				店铺介绍
+				店铺内景照
 			</view>
 			<view class="s_pass" v-if="!storeIntroductImg" @click="addImg(3)">
 				<image src="../../static/x.svg" mode=""></image>

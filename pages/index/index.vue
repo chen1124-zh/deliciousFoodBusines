@@ -373,7 +373,7 @@
 						userImg:'../../static/user2.png',
 						userName:'小旋风',
 						phone:'1888888888',
-						userAddress:'广州天河南山南比还',
+						userAddress:'到店人数：6人',
 						goodimgList:['../../static/tempGood2.png','../../static/tempGoodImg1.png','../../static/tempGood2.png'],
 						goodNameList:'鱼蛋分、肥牛',
 						allPrice:'25.5',

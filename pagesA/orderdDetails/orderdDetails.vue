@@ -17,7 +17,7 @@
 		
 		<view class="" style="position: relative;">
 			
-			<view class="" style="position: absolute;top: -20rpx; width: 100%;height: 60rpx;background: #0D92FF;z-index: -1;">
+			<view class="" style="position: absolute;top: -20rpx; width: 100%;height: 60rpx;background: #0D92FF;z-index: 0;">
 				
 			</view>
 			
@@ -68,15 +68,15 @@
 						</view>
 					</view>
 					
-					<view class="package" v-if="item.packing">
+					<view class="package">
 						<view class="">
 							包装费
 						</view>
 						<view class="" style="font-weight: bold;">
-							￥{{item.packing}}
+							￥{{item.packing || 0}}
 						</view>
 					</view>
-					<view class="" style="text-align: right;font-weight: bold;"  v-if="orderDetailData.id == 0">
+					<view class="" style="text-align: right;font-weight: bold;margin: 10rpx 0;"  v-if="orderDetailData.id == 0">
 						小计：￥{{item.subtotal}}
 					</view>
 				</view>
@@ -104,7 +104,7 @@
 			</view>
 			<view class="left_right">
 				<view class="subject">
-					预定时间
+					预订时间
 				</view>
 				<view class="content">
 					3月23日 周一 [12:45]
@@ -314,6 +314,7 @@
 		background: #fff;
 		box-shadow: 0 0 20rpx #f0f0f0;
 		border-radius: 10rpx;
+		position: relative;
 	}
 	
 	.good{

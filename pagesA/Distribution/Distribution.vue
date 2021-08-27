@@ -7,7 +7,7 @@
 			</view>
 		</view>
 		<view class="i">
-			<input type="number" v-model="shopData.startingPrice" placeholder="起送"/>
+			<input type="number" v-model="shopData.startingPrice" placeholder="起送价格"/>
 			<view class="">
 				元起
 			</view>
@@ -22,7 +22,7 @@
 			超出距离每千米
 			<view class="i" style="flex: 1;margin: 0;margin-left: 5rpx;">
 				
-				<input type="number" v-model="shopData.deliveryCost" placeholder="配送时间" />
+				<input type="number" v-model="shopData.deliveryCost" placeholder="配送费" />
 				<view class="">
 					元
 				</view>

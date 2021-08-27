@@ -173,7 +173,7 @@
                     "path" : "Induction/Induction",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "商家入驻",
+                    "navigationBarTitleText": "商户入驻",
                     "enablePullDownRefresh": false
                 }
                 

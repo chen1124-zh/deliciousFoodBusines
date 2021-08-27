@@ -660,6 +660,40 @@
 				this.step ++
 			},
 			addProductData(){
+				
+				var d = false
+				for (var i = 0; i < this.items.length; i++) {
+					if(this.items[i].checked == true){
+						d = true
+						break
+					}
+				}
+				
+				if(d == false){
+					uni.showToast({
+						title:'请选择备餐日期',
+						icon:"none"
+					})
+					return
+				}
+				
+				var z = false
+				for (var i = 0; i < this.sditems.length; i++) {
+					if(this.sditems[i].checked == true){
+						z = true
+						break
+					}
+				}
+				
+				if(z == false){
+					uni.showToast({
+						title:'请选择备餐时段',
+						icon:"none"
+					})
+					return
+				}
+				
+				
 				var productImgStr = ''
 				this.img.map((item)=>{
 					

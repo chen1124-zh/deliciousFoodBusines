@@ -18,7 +18,7 @@
 						<text class="mode">{{item.eatType==0?'外卖':'到店'}}</text> {{item.tiem}}送达
 					</view>
 					<view class="">
-						{{item.static==0?'已完成':'已取消'}}
+						{{orderStaticStr[item.static]}}
 						<!-- {{}} -->
 					</view>
 				</view>
@@ -92,6 +92,11 @@
 	export default {
 		data() {
 			return {
+				orderStaticStr:{
+					0:"已完成",
+					1:"已取消",
+					2:"已拒绝"
+				},
 				active: 0,
 				user:'',
 				navigation:'',
@@ -132,7 +137,7 @@
 						id:0,
 						eatType:0,
 						tiem:'12:30',
-						static:1,
+						static:2,
 						orderStatic:0,
 						userImg:'../../static/user2.png',
 						userName:'小旋风',

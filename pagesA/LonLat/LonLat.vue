@@ -81,6 +81,10 @@
 				success: function (res) {
 					
 					console.log(res)
+					this.lat = res.latitude
+					this.lon = res.longitude
+					this.covers[0].latitude = this.lat
+					this.covers[0].longitude = this.lon
 					// that.addrDel = res;
 				},
 				fail: function () {
