@@ -237,7 +237,7 @@
 			},
 			getMap(){
 				uni.navigateTo({
-					url:'../regionMap/regionMap'
+					url:'../hometown/hometown'
 				})
 			},
 			userZgood(){

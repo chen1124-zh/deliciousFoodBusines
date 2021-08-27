@@ -24,10 +24,10 @@
 				切换店铺
 			</view>
 			<view class="bang">
-				<view class="" style="font-size: 36rpx;">
+				<view class="">
 					￥{{profit.toFixed(2) || 0.00}}
 				</view>
-				<view class="" style="font-size: 20rpx;">
+				<view  style="font-size: 20rpx;">
 					累计收益
 				</view>
 			</view>
@@ -711,101 +711,142 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	
+	image{
+		width: 100%;
+		height: 100%;
+	}
 	.content{
 		background: #F7F7F7;
-	}
-	
-	.user_content{
-		display: flex;
-		align-items: center;
-	}
-	
-	.user_img{
-		width: 80rpx;
-		height: 80rpx;
-		background: #000;
-		border-radius: 50%;
-		margin:0 30rpx;
-		overflow: hidden;
-	}
-	
-	.all_achievement{
-		background: #270546;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		position: relative;
-		height: 360rpx;
-		/* padding-bottom: 30rpx; */
-	}
-	
-	.bang{
-		    width: 300rpx;
-		    height: 300rpx;
-		    background-color: transparent;
-		    border:4rpx solid rgb(248, 129, 1);
-		    text-align: center;
-			border-radius: 50%;
-			position: absolute;
+		.user_content{
+			display: flex;
+			align-items: center;
+			.user_img{
+				width: 80rpx;
+				height: 80rpx;
+				background: #000;
+				border-radius: 50%;
+				margin:0 30rpx;
+				overflow: hidden;
+			}
+		}
+		
+		.all_achievement{
+			background: #270546;
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
-			color: #fff;
-			/* bottom: -100rpx; */
-	}
-	
-	.achievement{
-		width: 100%;
-		display: flex;
-		justify-content: space-around;
-		font-size: 28rpx;
-		text-align: center;
-		color: #fff;
-		margin: 30rpx 0;
-		position: absolute;
-		bottom: 0;
-		background: #270546;
-		padding: 10rpx;
-	}
-	
-	.store_content{
-		position: relative;
+			align-items: center;
+			position: relative;
+			height: 360rpx;
+			.switchs{
+				position: absolute;
+				right: 0;
+				top: 20rpx;
+				padding: 6rpx 20rpx;
+				background: rgba(255,255,255,0.3);
+				font-size: 24rpx;
+				border-radius: 20rpx 0 0 20rpx;
+				/* z-index: 101; */
+				color: #fff;
+			}
+			
+			.bang{
+				width: 300rpx;
+				height: 300rpx;
+				background-color: transparent;
+				border:4rpx solid rgb(248, 129, 1);
+				text-align: center;
+				border-radius: 50%;
+				position: absolute;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				color: #fff;
+				font-size: 36rpx;
+				/* bottom: -100rpx; */
+			}
+			
+		}
 		
-	}
-	
-	.barck{
-		position: absolute;
-		top: 0;
-		width: 100%;
-		height: 60rpx;
-		border-radius: 0 0 20rpx 20rpx;
-		background: #270546;
-		/* z-index: -1; */
-	}
-	
-	.store_box{
-		background: #fff;
-		margin: 0 40rpx;
-		padding: 30rpx;
-		border-radius: 10rpx;
-		box-shadow: 0rpx 0rpx 20rpx #888888;
-		margin-bottom: 40rpx;
-		position: relative;
-	}
-	
-	.img_name{
-		display: flex;
-	}
-	
-	.img{
-		width: 80rpx;
-		height: 80rpx;
-		/* background: #000; */
-		border-radius: 10rpx;
-		margin-right: 20rpx;
-		overflow: hidden;
+		.achievement{
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+			font-size: 28rpx;
+			text-align: center;
+			color: #fff;
+			margin: 30rpx 0;
+			position: absolute;
+			bottom: 0;
+			background: #270546;
+			padding: 10rpx;
+		}
+		
+		.store_content{
+			position: relative;
+			
+			.barck{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 60rpx;
+				border-radius: 0 0 20rpx 20rpx;
+				background: #270546;
+			}
+		}
+		
+		.store_box{
+			background: #fff;
+			margin: 0 40rpx;
+			padding: 30rpx;
+			border-radius: 10rpx;
+			box-shadow: 0rpx 0rpx 20rpx #888888;
+			margin-bottom: 40rpx;
+			position: relative;
+			
+			.img_name{
+				display: flex;
+			}
+			
+			.img{
+				width: 80rpx;
+				height: 80rpx;
+				/* background: #000; */
+				border-radius: 10rpx;
+				margin-right: 20rpx;
+				overflow: hidden;
+			}
+			.order_item_img{
+				width: 112rpx;
+				height: 112rpx; 
+				background: #000;
+				margin-right: 10rpx;
+				border-radius: 10rpx;
+				overflow: hidden;
+			}
+			
+			.order_item_name{
+				color: #999;
+				margin-left: 20rpx;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			
+			.order_item_price{
+				color: #000;
+				font-size: 50rpx;
+			}
+			
+			.order_item_num{
+				font-size: 26rpx;
+				text-align: center;
+			}
+		}
+		
+		
+		
 	}
 	
 	.store_name{
@@ -827,7 +868,6 @@
 		margin-top: 20rpx;
 		display: flex;
 	}
-	
 	
 	.Specifications_item_img{
 		width: 70rpx;
@@ -926,40 +966,12 @@
 		display: flex;
 	}
 	
-	.order_item_img{
-		width: 112rpx;
-		height: 112rpx; 
-		background: #000;
-		margin-right: 10rpx;
-		border-radius: 10rpx;
-		overflow: hidden;
-	}
-	
-	.order_item_name{
-		color: #999;
-		margin-left: 20rpx;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
-	
-	.order_item_price{
-		color: #000;
-		font-size: 50rpx;
-	}
-	
-	.order_item_num{
-		font-size: 26rpx;
-		text-align: center;
-	}
-	
 	.agree{
 		margin-top: 20rpx;
 		display: flex;
 		justify-content: space-between;
 		
 	}
-	
 	
 	.agree view{
 		margin: 0 10rpx;
@@ -1008,7 +1020,6 @@
 		overflow: hidden;
 	}
 	
-	
 	.select_content{
 		margin: 30rpx;
 	}
@@ -1042,14 +1053,12 @@
 		color: #ccc;
 	}
 	
-	
 	.se{
 		font-size: 36rpx;
 		
 		padding: 30rpx;
 		border-bottom: 1rpx solid #ccc;
 	}
-	
 	
 	.Distribution_box{
 		width: 80%;
@@ -1069,18 +1078,6 @@
 		padding: 20rpx;
 		border-radius: 10rpx;
 		margin: 10rpx 0;
-	}
-	
-	.switchs{
-		position: absolute;
-		right: 0;
-		top: 20rpx;
-		padding: 6rpx 20rpx;
-		background: rgba(255,255,255,0.3);
-		font-size: 24rpx;
-		border-radius: 20rpx 0 0 20rpx;
-		/* z-index: 101; */
-		color: #fff;
 	}
 	
 	.mode{
@@ -1107,7 +1104,6 @@
 		font-size: 25rpx;
 	}
 	
-	
 	.phone_img{
 		width: 40rpx;
 		height: 40rpx;
@@ -1117,4 +1113,5 @@
 		font-size: 26rpx;
 		margin-right: 100rpx;
 	}
+	
 </style>
