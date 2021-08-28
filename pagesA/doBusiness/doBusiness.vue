@@ -156,13 +156,13 @@
 					<view class="search"><uni-icons type="search" color='#999'></uni-icons> {{dates||'选择日期'}}</view>
 				</picker>	
 				
-				<text style="color: #10C5A5;">暂停时段</text>
+				<text style="color: #10C5A5;" @click="modal">暂停时段</text>
 			</view>
 			
 			
 			
 			<view class="">
-				<view class="item_date" v-for="(item,index) in suspendList" :key='index'>
+				<view class="item_date" v-for="(item,index) in suspendList" :key='index' v-if="item.static != 2">
 					<view class="dateSty">
 						<text :style="{'background': item.static == 0?'#F7CCD1':'#FDEBD3','color': item.static == 0?'#D9001B':'#F59A23','font-size': '24rpx','border-radius': '10rpx','padding':'5rpx 10rpx'}">{{item.static == 0?'暂停中':'已恢复'}}</text>
 						<text class="date">{{item.date}}</text>
@@ -171,32 +171,32 @@
 						<text>{{item.etime}}</text>
 					</view>
 					<view class="operation">
-						<text v-if="item.static == 0">恢复</text> 
-						<text v-if="item.static == 1">删除</text>
-						<text v-if="item.static == 1">暂停</text>
+						<text v-if="item.static == 0" @click="recovery(index)">恢复</text> 
+						<text v-if="item.static == 1" @click="deletes(index)">删除</text>
+						<text v-if="item.static == 1" @click="suspend(index)">暂停</text>
 					</view>
 				</view>
 			</view>
 			
 			
-			<view class="modal">
+			<view class="modal" v-if="slotModal">
 				
 				<view class="slot-content">
 					
-					<view style="font-weight: bold;margin-top: 20rpx;">
+					<view style="font-weight: bold;margin-bottom: 20rpx;">
 						暂停营业时段
 					</view>
 					<view class="content">
-						<picker mode="date" :value="date" style="width: 100%;" :start="startDate" :end="endDate"
+						<picker mode="date" :value="form.date" style="width: 100%;" :start="startDate" :end="endDate"
 							@change="bindDateChange1">
 							<input type="text" v-model="form.date" placeholder="选择日期" maxlength="10" />
 						</picker>
 	
-						<picker mode="time" :value="startTime" start="09:01" end="21:01"
+						<picker mode="time" :value="form.startTime" start="09:01" end="21:01"
 							@change="bindTimeChange">
 							<input type="text" disabled v-model="form.startTime" placeholder="开始时间" />
 						</picker>
-						<picker mode="time"  :value="endTime" start="09:01" end="21:01"
+						<picker mode="time"  :value="form.endTime" start="09:01" end="21:01"
 							@change="bindTimeChange2">
 							<input type="text" disabled v-model="form.endTime" placeholder="结束时间" />
 						</picker>
@@ -273,6 +273,7 @@
 					startTime: '',
 					endTime: '',
 				},
+				slotModal:false
 			}
 		},
 		computed: {
@@ -324,6 +325,65 @@
 				
 		},
 		methods: {
+			recovery(index){
+				uni.showModal({
+				    title: '提示',
+				    content: '确定要恢复吗',
+				    success: (res) => {
+				        if (res.confirm) {
+				            this.suspendList[index].static = 1
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
+			deletes(index){
+				uni.showModal({
+				    title: '提示',
+				    content: '确定要删除吗',
+				    success: (res) => {
+				        if (res.confirm) {
+				            this.suspendList[index].static = 2
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
+			suspend(index){
+				uni.showModal({
+				    title: '提示',
+				    content: '确定要暂停吗',
+				    success: (res) => {
+				        if (res.confirm) {
+				            this.suspendList[index].static = 0
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
+			submit(){
+				this.suspendList.push({
+					date:this.form.date,
+					stime:this.form.startTime,
+					etime:this.form.endTime,
+					static:0
+				})
+				this.slotModal = false
+			},
+			modal(){
+				this.form = {
+					date: '',
+					startTime: '',
+					endTime: '',
+				},
+				this.slotModal = true
+			},
+			handleClose2(){
+				this.slotModal = false
+			},
 			getDate(type) {
 				const date = new Date();
 				let year = date.getFullYear();
@@ -657,6 +717,7 @@
         flex-direction: column;
 		background: #fff;
 		width: 85%;
+		border-radius: 20rpx;
         .content {
             display: flex;
             flex-direction: column;
@@ -677,18 +738,26 @@
         .footer {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: space-between;
             width: 100%;
 
             text {
+				width: 30%;
                 text-align: center;
                 height: 60rpx;
                 line-height: 60rpx;
-                width: 50%;
+                width: 30%;
+				border: 1rpx solid #f0f0f0;
+				color: #999;
+				border-radius: 10rpx;
             }
 
             text:last-child {
-                color: rgb(19, 71, 228);
+				width: 65%;
+				background-color: #10C5A5;
+				color: #fff;
+				// text-align: right;
+                // color: rgb(19, 71, 228);
             }
         }
 		
