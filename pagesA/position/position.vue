@@ -17,9 +17,9 @@
 			<view class="a" v-for="(item,index) in z" :key='index' :style="{'top':item.top+'rpx','left':item.left+'rpx','color':item.color}" :id="item.id" @touchmove="yd">
 				{{item.name}}
 			</view>
-			<view class="" id="BImg" style="width: 100%;height: 600rpx;">
-				<image :src="bImg" mode="" style="width: 100%;height: 100%;"></image>
-			</view>
+			<!-- <view class="" id="BImg" style="width: 100%;height: 600rpx;"> -->
+				<image :src="bImg"  id="BImg" mode="widthFix" style="width: 100%;"></image>
+			<!-- </v/iew> -->
 		</view>
 		<view class="repair" @click="modify = !modify"
 		 :style="{'color':modify?'red':'#07C160'}">
@@ -274,7 +274,18 @@
 			yd(e){
 				var winWidth = uni.getSystemInfoSync().windowWidth;
 				var proportion = 750/winWidth
-				console.log()
+				
+				
+				// const query = uni.createSelectorQuery().in(this);
+				// query.select('#BImg').boundingClientRect(data => {
+				// 	console.log('BImg',data)
+					
+				// 	console.log("e.changedTouches[0].pageY",e.changedTouches[0].pageY)
+				// 	console.log('e.changedTouches[0].pageX',e.changedTouches[0].pageX)
+				// 	this.z[e.currentTarget.id].top = data.height/e.changedTouches[0].pageY
+				// 	this.z[e.currentTarget.id].left = data.height/e.changedTouches[0].pageX
+				// }).exec();
+				
 				this.z[e.currentTarget.id].top = (e.changedTouches[0].pageY-100)*proportion
 				this.z[e.currentTarget.id].left = (e.changedTouches[0].pageX-30)*proportion
 			},
