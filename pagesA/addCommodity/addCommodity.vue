@@ -38,7 +38,7 @@
 					<input type="text" v-model="addData.productName" />
 				</view>
 			</view>
-			<view class="line_box">
+			<!-- <view class="line_box">
 				<view class="">
 					商品价格
 				</view>
@@ -47,7 +47,7 @@
 					<input type="number"  v-model="addData.productPrice" />
 					<text>元</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="line_box">
 				<view class="">
 					划线价格
@@ -64,6 +64,20 @@
 				<view class="">
 					<picker mode="selector" :range="addData.menuType" range-key="menuName" @change='changeMenuType'>
 						<view>{{addData.menuType[addData.menuTypeIndex].menuName}}</view>
+					</picker>
+					<!-- <input type="text" value="" />
+					<text>元</text> -->
+				</view>
+			</view>
+			
+			
+			<view class="line_box">
+				<view class="">
+					餐型选择
+				</view>
+				<view class="">
+					<picker mode="selector" :range="packageList" range-key="name" @change='changePackageType'>
+						<view>{{packageList[packageIndex].name}}</view>
 					</picker>
 					<!-- <input type="text" value="" />
 					<text>元</text> -->
@@ -131,12 +145,52 @@
 		</view>
 		
 		<view class="" v-if="step == 2">
-			<view class="" style="margin: 40rpx;border: 1rpx solid #ccc;padding: 20rpx 0; text-align: center;" @click="addSpecifications">
+			<view class="addSpecifications"  @click="addSpecifications">
 				添加商品规格
 			</view>
 			
-			<view class="Specifications" style="display: flex;" v-for="(item,index) in specification" :key="index">
-				<view class="Sbox">
+			<view class="Specifications" v-for="(item,index) in specification" :key="index">
+				
+				<view class="one">
+					<view class="" style="display: flex;align-items: center;">
+						<text class="title" v-if="item.edit">{{item.title}}</text>
+						<input type="text" v-else v-model="item.title" class="title s" @blur='lose(index)'/>
+						<view class="fons" @click="againTitle(index)">
+							<uni-icons type="compose" color="#269DFF"></uni-icons><text style="color: #269DFF;">重命名</text>
+						</view>
+						
+					</view>
+					<view class="operation">
+						<view class="fons" @click="deleteMaxItem(index)">
+							<uni-icons type="trash" color="red"></uni-icons><text style="color:red" > 删除</text>
+						</view>
+						<view class="fons add" @click="addContent(index)">
+							<view class="addIcon">+</view> <text>添加</text>
+						</view>
+					</view>
+				</view>
+				
+				<view class="contentBox" v-for="(items,indexs) in item.content" :key='indexs'>
+					<view class="Sbox">
+						<view class="">
+							名称
+						</view>
+						<input type="text" v-model="items.name" />
+						
+					</view>
+					<view class="Sbox">
+						<view class="">
+							单价
+						</view>
+						<input type="number" v-model="items.price"  />
+					</view>
+					
+					<view class="" @click="deleteItem(index,indexs)">
+						<uni-icons type="trash" color="red"></uni-icons>
+					</view>
+				</view>
+				
+				<!-- <view class="Sbox">
 					<view class="">
 						名称
 					</view>
@@ -148,7 +202,7 @@
 						额外价
 					</view>
 					<input type="number" v-model="item.price"  />
-				</view>
+				</view> -->
 			</view>
 		</view>
 		
@@ -355,6 +409,18 @@
 						checked:false
 					}
 				],
+				packageList:[
+					{
+						name:'行政套餐'
+					},
+					{
+						name:'自选套餐'
+					},
+					{
+						name:'会务套餐'
+					}
+				],
+				packageIndex:0,
 				user:'',
 				addData:{
 					productName:'',     //商品名称
@@ -524,6 +590,9 @@
 			this.user = uni.getStorageSync("user")
 		},
 		methods: {
+			changePackageType(e){
+				this.packageIndex = e.detail.value
+			},
 			dimg(id){
 				var t = this.img.filter((item)=>{
 					if(item.id != id){
@@ -579,11 +648,45 @@
 			},
 			addSpecifications(){
 				this.specification.push({
-					name:'',
-					price:'',
+					title:'规格',
+					edit:true,
+					content:[]
 				})
 			},
-			checkboxChange: function (e) {
+			lose(index){
+				this.specification[index].edit = true
+			},
+			againTitle(index){
+				this.specification[index].edit = false
+			},
+			addContent(index){
+				this.specification[index].content.push({
+					name:'',
+					price:''
+				})
+			},
+			deleteMaxItem(index){
+				
+				var tempArr = []
+				tempArr = this.specification.filter((item,i)=>{
+					if(index != i){
+						return item
+					}
+				})
+				
+				this.specification = tempArr
+			},
+			deleteItem(index,indexs){
+				var tempArr = []
+				tempArr = this.specification[index].content.filter((item,i)=>{
+					if(indexs != i){
+						return item
+					}
+				})
+				
+				this.specification[index].content = tempArr
+			},
+			checkboxChange(e) {
 				var items = this.items,
 					values = e.detail.value;
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
@@ -596,7 +699,6 @@
 				}
 				
 			},
-			
 			checkboxsditemsChange(e){
 				var items = this.sditems,
 					values = e.detail.value;
@@ -647,7 +749,7 @@
 			},
 			nextStep(i){
 				if(i == 1){
-					if(this.addData.productName == '' || this.addData.productPrice == '' || this.addData.linedPrice == '' || this.addData.describe == '' ) {
+					if(this.addData.productName == '' || this.addData.linedPrice == '' || this.addData.describe == '' ) {
 						uni.showToast({
 							title:'请补充完！！！',
 							icon:"none"
@@ -701,13 +803,13 @@
 					
 					
 				})
-				
-				
+				// console.log(this.specification)
+				// return
 				productImgStr = productImgStr.substring(0,productImgStr.length-1)
 				
 				var data = {
 					productName:this.addData.productName,     //商品名称
-					productPrice:this.addData.productPrice,   //商品价格
+					productPrice:this.addData.productPrice||0,   //商品价格
 					linedPrice:this.addData.linedPrice,   //划线价格
 					menuType:this.addData.menuType[this.addData.menuTypeIndex].id,      //菜单类型
 					productDetails:this.addData.productDetails,   //商品详情
@@ -726,6 +828,7 @@
 					productStatus:1,   //商品状态
 					productSet:this.addData.productSet,   //商品系列
 					discount:0,
+					setType:this.packageIndex+1,
 					week1:this.items[0].checked?1:0,
 					week2:this.items[1].checked?1:0,
 					week3:this.items[2].checked?1:0,
@@ -813,7 +916,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	
 	.step{
 		display: flex;
@@ -896,7 +999,6 @@
 		padding: 10rpx;
 	}
 	
-	
 	.lower{
 		padding: 20rpx 0;
 		background: #10C5A5;
@@ -905,7 +1007,6 @@
 		color: #fff;
 		border-radius: 20rpx;
 	}
-	
 	
 	.UpDown{
 		display: flex;
@@ -967,24 +1068,78 @@
 	}
 	
 	.Specifications{
-		display: flex;
-		margin: 10rpx 45rpx;
+		width: 86%;
+		background: #fff;
+		box-shadow: 0 0 10rpx #f0f0f0;
+		border-radius: 20rpx;
+		margin: 20rpx auto;
+		padding: 20rpx;
+		.one{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.title{
+				font-size: 40rpx;
+				width: 120rpx;
+				font-weight: bolder;
+				white-space: nowrap;
+			}
+			.s{
+				border-bottom: 1rpx solid #F0F0F0;
+			}
+			
+		}
+		
+		.operation{
+			display: flex;
+			.add{
+				color: #10C5A5;
+				display: flex;
+				.addIcon{
+					border: 1rpx solid #10C5A5;
+					width: 30rpx;
+					height: 30rpx;
+					border-radius: 50%;
+					text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			}
+			
+		}
+		
+		.fons{
+			font-size: 28rpx;
+			margin: 0 20rpx;
+		}
+	
+		.contentBox{
+			display: flex;
+			align-items: center;
+			margin: 16rpx;
+			.Sbox{
+				display: flex;
+				align-items: center;
+				margin: 0 10rpx;
+				view{
+					color: #999;
+				}
+				input{
+					flex: 1;
+					border: 1rpx solid #ccc;
+					border-radius: 7rpx;
+					margin: 0 10rpx;
+					padding: 6rpx;
+				}
+			}
+		}
 	}
 	
 	
-	.Sbox{
-		display: flex;
-		align-items: center;
-		margin: 0 10rpx;
-	}
 	
-	.Sbox input{
-		flex: 1;
-		border: 1rpx solid #ccc;
-		border-radius: 10rpx;
-		margin:  0 10rpx;
-		padding: 6rpx;
-	}
+	
 	
 	
 	.s_pass{
@@ -1005,4 +1160,14 @@
 		width: 40rpx;
 		height: 40rpx;
 	}
+	
+	.addSpecifications{
+		    border-radius: 10rpx;
+		    background: #10C5A5;
+		    color: #fff;
+		    margin: 20rpx 45rpx;
+		    padding: 16rpx;
+		    text-align: center;
+	}
+	
 </style>

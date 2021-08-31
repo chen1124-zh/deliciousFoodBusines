@@ -200,7 +200,7 @@
                     "path" : "reserve/reserve",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "预定设置",
+                    "navigationBarTitleText": "预订设置",
                     "enablePullDownRefresh": false
                 }
                 

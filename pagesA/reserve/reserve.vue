@@ -81,14 +81,14 @@
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
-						<text style="color: #000;">当天预约</text>
+						<text style="color: #000;">当天预订</text>
 						<view class="pickerTime"  >
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindzcTimeChange">
 								<view class="uni-input">{{zcTime.today.time}}</view>
 							</picker>
 							<!-- 7:00 -->
 						</view>
-						<text>前预定</text>
+						<text>前预订</text>
 					</view>
 					
 				</view>
@@ -98,7 +98,7 @@
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
-							隔天预定
+							隔天预订
 						</view>
 						
 					</view>
@@ -120,7 +120,7 @@
 							</view>
 							
 							<view class="">
-								天预约
+								天预订
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
@@ -131,7 +131,7 @@
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>前预定</text>
+							<text>前预订</text>
 							
 						</view>
 					</view>
@@ -147,14 +147,14 @@
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
-						<text style="color: #000;">当天预约</text>
+						<text style="color: #000;">当天预订</text>
 						<view class="pickerTime"  >
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindzchTimeChange">
 								<view class="uni-input">{{zchTime.today.time}}</view>
 							</picker>
 							<!-- 7:00 -->
 						</view>
-						<text>前预定</text>
+						<text>前预订</text>
 					</view>
 					
 				</view>
@@ -164,7 +164,7 @@
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
-							隔天预定
+							隔天预订
 						</view>
 						
 					</view>
@@ -187,7 +187,7 @@
 							</view>
 							
 							<view class="">
-								天预约
+								天预订
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
@@ -198,7 +198,7 @@
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>前预定</text>
+							<text>前预订</text>
 							
 						</view>
 					</view>
@@ -214,14 +214,14 @@
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
-						<text style="color: #000;">当天预约</text>
+						<text style="color: #000;">当天预订</text>
 						<view class="pickerTime"  >
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindwcTimeChange">
 								<view class="uni-input">{{wcTime.today.time}}</view>
 							</picker>
 							<!-- 7:00 -->
 						</view>
-						<text>前预定</text>
+						<text>前预订</text>
 					</view>
 					
 				</view>
@@ -231,7 +231,7 @@
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
-							隔天预定
+							隔天预订
 						</view>
 						
 					</view>
@@ -257,7 +257,7 @@
 							</view>
 							
 							<view class="">
-								天预约
+								天预订
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
@@ -268,7 +268,7 @@
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>前预定</text>
+							<text>前预订</text>
 							
 						</view>
 					</view>
@@ -285,14 +285,14 @@
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
-						<text style="color: #000;">当天预约</text>
+						<text style="color: #000;">当天预订</text>
 						<view class="pickerTime"  >
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindwcnTimeChange">
 								<view class="uni-input">{{wcnTime.today.time}}</view>
 							</picker>
 							<!-- 7:00 -->
 						</view>
-						<text>前预定</text>
+						<text>前预订</text>
 					</view>
 					
 				</view>
@@ -302,7 +302,7 @@
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
-							隔天预定
+							隔天预订
 						</view>
 						
 					</view>
@@ -328,7 +328,7 @@
 							</view>
 							
 							<view class="">
-								天预约
+								天预订
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
@@ -339,7 +339,7 @@
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>前预定</text>
+							<text>前预订</text>
 							
 						</view>
 					</view>
@@ -356,14 +356,14 @@
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
-						<text style="color: #000;">当天预约</text>
+						<text style="color: #000;">当天预订</text>
 						<view class="pickerTime"  >
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindyxTimeChange">
 								<view class="uni-input">{{yxTime.today.time}}</view>
 							</picker>
 							<!-- 7:00 -->
 						</view>
-						<text>前预定</text>
+						<text>前预订</text>
 					</view>
 					
 				</view>
@@ -373,7 +373,7 @@
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
-							隔天预定
+							隔天预订
 						</view>
 						
 					</view>
@@ -399,7 +399,7 @@
 							</view>
 							
 							<view class="">
-								天预约
+								天预订
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
@@ -410,7 +410,7 @@
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>前预定</text>
+							<text>前预订</text>
 							
 						</view>
 					</view>
@@ -453,16 +453,17 @@
 						<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 					</view>
 					<view class="" style="display: flex;color: #999;">
-						<text style="color: #000;">当天预约</text>
+						<text style="color: #000;">当天预订</text>
 						
 						<text style="margin-left:10px;">提前</text>
 						<view class="pickerTime"  >
+							
 							<picker mode="time" :value="time" start="09:01" end="21:01" @change="bindDTimeChange">
 								<view class="uni-input">{{DTime.today.time}}</view>
 							</picker>
 							<!-- 7:00 -->
 						</view>
-						<text>前预定</text>
+						<text>前预订</text>
 					</view>
 					
 				</view>
@@ -472,7 +473,7 @@
 							<uni-icons type="checkmarkempty" color='#fff'></uni-icons>
 						</view>
 						<view style="color: #000;">
-							隔天预定
+							隔天预订
 						</view>
 						
 					</view>
@@ -494,7 +495,7 @@
 							</view>
 							
 							<view class="">
-								天预约
+								天预订
 							</view>
 						</view>
 						<view class="" style="display: flex;color: #999;margin: 10rpx 0;">
@@ -505,7 +506,7 @@
 								</picker>
 								<!-- 7:00 -->
 							</view>
-							<text>预定</text>
+							<text>预订</text>
 							
 						</view>
 					</view>
@@ -525,18 +526,18 @@
 				</view>
 			</view>
 			<!-- <view class="">
-				当天预约 7:00 前预定
+				当天预订 7:00 前预订
 			</view>
 			<view class="">
 				<view class="">
-					隔天预定
+					隔天预订
 				</view>
 				<view class="">
 					<view class="">
-						往后1至30天预约
+						往后1至30天预订
 					</view>
 					<view class="">
-						今天23:00前预约
+						今天23:00前预订
 					</view>
 				</view>
 			</view> -->
@@ -561,8 +562,7 @@
 				meeting:false,
 				snacks:false,
 				vip:false,
-				
-				
+				shi:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
 				select:0,
 				type: true,
 				DTime:{
@@ -738,34 +738,34 @@
 			
 			
 			opData(){
-				// String bookSetUp;          //预定设置
+				// String bookSetUp;          //预订设置
 				// String seat;            //座位
 				// Integer eatType;         //套餐类型
 				// Integer zcTimeType;       //早餐类型
-				// Integer zcBookHour;       //早餐预定时间
-				// Integer zcBookDay1;       //早餐预定天数1
-				// Integer zcBookDay2;       //早餐预定天数2
-				// Integer zcNowTimeBook;     //早餐今天预定时间
+				// Integer zcBookHour;       //早餐预订时间
+				// Integer zcBookDay1;       //早餐预订天数1
+				// Integer zcBookDay2;       //早餐预订天数2
+				// Integer zcNowTimeBook;     //早餐今天预订时间
 				// Integer zchTimeType;      //早茶类型
-				// Integer zchBookHour;      //早茶预定时间
-				// Integer zchBookDay1;       //早茶预定天数1
-				// Integer zchBookDay2;        //早茶预定天数2
-				// String zchNowTimeBook;       //早茶今天预定时间
-				// Integer wcTimeType;       //午餐预定类型
-				// Integer wcBookHour;       //午餐预定时间
-				// Integer wcBookDay1;       //午餐预定天数1
-				// Integer wcBookDay2;      //午餐预定天数2
-				// String wcNowTimeBook;    //午餐今天预定时间
-				// String wcnTimeType;      //晚餐预定类型
-				// Integer  wcnBookHour;      //晚餐预定时间
-				// Integer wcnBookDay1;         //晚餐预定填数1
-				// Integer wcnBookDay2;        //晚餐预定填数2
-				// Integer wcnNowTimeBook;    //晚餐今天预定时间
-				// Integer yxTimeType;      //宵夜预定类型
-				// Integer yxBookHour;     //宵夜预定时间
-				// Integer yxBookDay1;     //宵夜预定天数1
-				// Integer yxBookDay2;     //宵夜预定天数2
-				// Integer yxNowTimeBook;   //宵夜今天预定时间
+				// Integer zchBookHour;      //早茶预订时间
+				// Integer zchBookDay1;       //早茶预订天数1
+				// Integer zchBookDay2;        //早茶预订天数2
+				// String zchNowTimeBook;       //早茶今天预订时间
+				// Integer wcTimeType;       //午餐预订类型
+				// Integer wcBookHour;       //午餐预订时间
+				// Integer wcBookDay1;       //午餐预订天数1
+				// Integer wcBookDay2;      //午餐预订天数2
+				// String wcNowTimeBook;    //午餐今天预订时间
+				// String wcnTimeType;      //晚餐预订类型
+				// Integer  wcnBookHour;      //晚餐预订时间
+				// Integer wcnBookDay1;         //晚餐预订填数1
+				// Integer wcnBookDay2;        //晚餐预订填数2
+				// Integer wcnNowTimeBook;    //晚餐今天预订时间
+				// Integer yxTimeType;      //宵夜预订类型
+				// Integer yxBookHour;     //宵夜预订时间
+				// Integer yxBookDay1;     //宵夜预订天数1
+				// Integer yxBookDay2;     //宵夜预订天数2
+				// Integer yxNowTimeBook;   //宵夜今天预订时间
 				
 				this.shop.bookSetUp = this.select
 				this.shop.seat = this.itemType
