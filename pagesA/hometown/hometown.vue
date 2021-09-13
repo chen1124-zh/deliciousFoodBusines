@@ -9,6 +9,56 @@
 					港澳台及海外
 				</view>
 			</view>
+			
+			<view class="select-al-box">
+				<view class="select-al-item">
+					省份
+					<text class="items actives"></text>
+				</view>
+				
+				<view class="select-al-item">
+					城市
+					<text class="items actives"></text>
+				</view>
+				
+				
+				<view class="select-al-item">
+					区县
+					<text class="items actives"></text>
+				</view>
+				
+				
+				<view class="select-al-item">
+					镇/街道
+					<text class="items actives"></text>
+				</view>
+				
+				<view class="select-al-item">
+					村/社区
+					<text class="items actives"></text>
+				</view>
+			</view>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<view class="select-al-box" v-show="showType == '0'">
 				<text v-for="(item, index) in selectAlList" :index="item.title" :style="{ width: itemWidth + '%' }" class="select-al-item"
 				 :key="index" @tap="selectAl(index, item)">

@@ -817,14 +817,7 @@
 				margin-right: 20rpx;
 				overflow: hidden;
 			}
-			.order_item_img{
-				width: 112rpx;
-				height: 112rpx; 
-				background: #000;
-				margin-right: 10rpx;
-				border-radius: 10rpx;
-				overflow: hidden;
-			}
+			
 			
 			.order_item_name{
 				color: #999;
@@ -847,6 +840,17 @@
 		
 		
 		
+	}
+	
+	
+	
+	.order_item_img{
+		width: 112rpx;
+		height: 112rpx; 
+		background: #000;
+		margin-right: 10rpx;
+		border-radius: 10rpx;
+		overflow: hidden;
 	}
 	
 	.store_name{
