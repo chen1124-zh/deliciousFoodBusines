@@ -78,13 +78,12 @@
 			uni.getLocation({
 				type: 'wgs84',
 				geocode:true,//设置该参数为true可直接获取经纬度及城市信息
-				success: function (res) {
-					
+				success: (res) =>{
 					console.log(res)
 					this.lat = res.latitude
 					this.lon = res.longitude
-					this.covers[0].latitude = this.lat
-					this.covers[0].longitude = this.lon
+					this.covers[0].latitude = res.latitude
+					this.covers[0].longitude = res.longitude
 					// that.addrDel = res;
 				},
 				fail: function () {
@@ -94,12 +93,16 @@
 					});
 				}
 			});
+			
+			console.log(2)
 		},
 		onShow() {
 			var u = uni.getStorageSync('tempLanLon')
+			console.log(u == '')
 			if(u == ''){
 				
 			}else{
+				console.log(1)
 				this.lat = u.location.lat
 				this.lon = u.location.lng
 				this.covers[0].latitude = this.lat
@@ -110,6 +113,7 @@
 		},
 		methods: {
 			locationName(lat,lon){
+				console.log(3)
 				this.qqmapsdk.reverseGeocoder({
 					location:{
 						latitude:lat,

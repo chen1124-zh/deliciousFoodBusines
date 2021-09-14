@@ -233,5 +233,6 @@ export default{
 	selectOrderTotal,
 	selectPeopleTotal,
 	selectAllTotal,
-	deleteStore
+	deleteStore,
+	getCityList
 }

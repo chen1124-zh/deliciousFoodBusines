@@ -74,8 +74,8 @@
 					<text style="color: red;">*</text>所在地区
 				</view>
 				<view class="inp" @click="getMap">
-					<view class="" v-if="region.province&&region.city&&region.district">
-						{{region.province}}{{region.city}}{{region.district}}
+					<view class="" v-if="diqu.length > 0">
+						{{diqu[0].list[diqu[0].qselectIndex].name}}/{{diqu[1].list[diqu[1].qselectIndex].name}}/{{diqu[2].list[diqu[2].qselectIndex].name}}/{{diqu[3].list[diqu[3].qselectIndex].name}}/{{diqu[4].list[diqu[4].qselectIndex].name}}
 					</view>
 					<view class="h" v-else>
 						省市区县、镇/街道、村/社区等
@@ -167,6 +167,7 @@
 				},
 				cui:'',
 				hao:'',
+				diqu:[],
 				goodType:[
 					{
 						name:'个人（小微）商户'
@@ -237,7 +238,7 @@
 			},
 			getMap(){
 				uni.navigateTo({
-					url:'../hometown/hometown'
+					url:'../hometown/hometown?pcaList='+JSON.stringify(this.diqu)
 				})
 			},
 			userZgood(){

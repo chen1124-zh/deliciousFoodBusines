@@ -79,33 +79,51 @@
 .actives{
 	border-color:#669900 ;
 }
-.swiper-box {
-	width: 100%;
-	flex: 1;
-	// height:calc(100vh - 320upx) ;
-	swiper-item {
-		height: 100%;
+
+.region{
+	height: 78vh;
+	padding: 10rpx;
+	overflow-y: auto;
+	.region_box{
+		
 	}
-	.adress-item {
-		height: 100%;
-		.item {
-			padding: 30rpx;
-			transition: all 0.3s ease;
-			&.active {
-				color: #669900;
-				background-color: #f2f2f2;
-			}
-			&.active {
-				text::before{
-					display: inline-block;
-				}
-			}
-			text{
-				font-size: 26rpx;
-			}
-			text::before{
-				display: none;
-			}
-		}
+	
+	.region_Item{
+		display: flex;
+		justify-content: space-between;
+		padding: 20rpx;
+		border-bottom: 1rpx solid #F0F0F0;
 	}
 }
+
+
+// .swiper-box {
+// 	width: 100%;
+// 	flex: 1;
+// 	// height:calc(100vh - 320upx) ;
+// 	swiper-item {
+// 		height: 100%;
+// 	}
+// 	.adress-item {
+// 		height: 100%;
+// 		.item {
+// 			padding: 30rpx;
+// 			transition: all 0.3s ease;
+// 			&.active {
+// 				color: #669900;
+// 				background-color: #f2f2f2;
+// 			}
+// 			&.active {
+// 				text::before{
+// 					display: inline-block;
+// 				}
+// 			}
+// 			text{
+// 				font-size: 26rpx;
+// 			}
+// 			text::before{
+// 				display: none;
+// 			}
+// 		}
+// 	}
+// }
